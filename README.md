@@ -134,21 +134,12 @@ eu.algites.tool.build.java-gradle
 
 ---
 
-## 🔄 CI, Branching & Publishing Policy
+## 🔄 Continuous Integration (Algites CI)
 
-This repository uses the Algites unified CI pipeline.
+This repository uses the **Algites unified GitHub Actions CI pipeline** (build/test/publish rules are centralized).
 
-Branch behavior:
-
-- `main`, `develop`, and also `*/main`, `*/develop`  
-  → **publish** artifacts (Gradle/Maven depending on the workflow).
-- `feature-testrun/*` and also `*/feature-testrun/*`  
-  → **tests only** (no publish/deploy).
-- any other branches  
-  → CI may **skip publishing** (and may exit early).
-
-See the complete policy:
-https://github.com/Algites-EU/pub.gov.Algites.specs/blob/main/Algites-CI-Branching-And-Publishing.md
+For exact usage and naming of the branches to utilize fully the defined possibilities, see
+https://github.com/Algites-EU/pub.gov.Algites.specs/blob/main/ci/Algites-Github-CI-Policy.md
 
 ---
 
