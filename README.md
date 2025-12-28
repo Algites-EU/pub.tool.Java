@@ -22,12 +22,13 @@ This repository hosts:
 - **Maven parent POMs** – published as parent artifacts to inherit standardized settings.
 - **Shared version catalogs** – single authoritative definitions of dependency and plugin versions.
 - **Templates and generators** – used to produce the final Maven and Gradle artifacts.
+- **Plugins for various Java infrastructure tools** – used to produce plugins for CI and development tools.
 
 It is intended to be used as the *build foundation* for all Algites Java-related repositories.
 
 ---
 
-## Structure of the **build** module group tools
+## Structure of the **build** module group
 
 The repository is organized by build *levels*, each representing a layer of build conventions:
 
@@ -130,6 +131,24 @@ eu.algites.tool.build.java-gradle
 
 - **Reproducibility and stability**  
   Generated artifacts embed fixed versions and settings.
+
+---
+
+## 🔄 CI, Branching & Publishing Policy
+
+This repository uses the Algites unified CI pipeline.
+
+Branch behavior:
+
+- `main`, `develop`, and also `*/main`, `*/develop`  
+  → **publish** artifacts (Gradle/Maven depending on the workflow).
+- `feature-testrun/*` and also `*/feature-testrun/*`  
+  → **tests only** (no publish/deploy).
+- any other branches  
+  → CI may **skip publishing** (and may exit early).
+
+See the complete policy:
+https://github.com/Algites-EU/pub.gov.Algites.specs/blob/main/Algites-CI-Branching-And-Publishing.md
 
 ---
 
