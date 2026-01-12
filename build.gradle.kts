@@ -1,4 +1,4 @@
-
+/* --- START OF: common sniplet for build.gradle.kts in repo root --- */
 plugins {
     `java-library`
     `maven-publish`
@@ -30,7 +30,6 @@ publishing {
     }
 }
 
-/* --- START OF: common sniplet for repo publishment --- */
 fun String.capFirst(): String =
     replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
 
@@ -50,31 +49,72 @@ val locRepoName = buildString {
     append(locDirection.capFirst())
 }
 
-publishing {
-    repositories {
-
-        if (locRepoUrl != null && locRepoUser != null && locRepoPass != null) {
-            maven {
-                name = locRepoName
-                url = uri(locRepoUrl)
-                credentials {
-                    username = locRepoUser
-                    password = locRepoPass
-                }
-            }
-        } else {
-            logger.lifecycle("Remote repo disabled (ALGITES_REPO_* not set). Repo name would be '$locRepoName'.")
-        }
-    }
-}
-
 val locIsCi = providers.environmentVariable("CI").orNull == "true"
 if (locIsCi && !locHasRemoteRepo) {
     throw GradleException("CI build requires ALGITES_REPO_* for publishing.")
 }
-tasks.named("publish") {
-    if (!locIsCi && !locHasRemoteRepo) {
-        dependsOn("publishToMavenLocal")
+
+
+subprojects {
+    /* artifactId = "<rootProject.name>_<subproject-path-with-dots>" */
+    val locRepoName = rootProject.name
+
+    val locPathDots = project.path
+        .removePrefix(":")
+        .replace(':', '.')
+
+    val locCanonicalArtifactId = if (locPathDots.isBlank()) {
+        locRepoName
+    } else {
+        "${locRepoName}_${locPathDots}"
+    }
+
+    /* Set local archive base name (jar file name prefix) */
+    plugins.withId("base") {
+        base {
+            archivesName.set(locCanonicalArtifactId)
+        }
+    }
+
+    /* Set Maven artifactId for all Maven publications in this subproject */
+    plugins.withId("maven-publish") {
+        publishing {
+            publications.withType(MavenPublication::class.java).configureEach {
+                artifactId = locCanonicalArtifactId
+            }
+        }
+        extensions.configure<PublishingExtension>("publishing") {
+            repositories {
+                if (locHasRemoteRepo) {
+                    maven {
+                        name = locRepoName
+                        url = uri(locRepoUrl!!)
+                        credentials {
+                            username = locRepoUser!!
+                            password = locRepoPass!!
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /* Local fallback: if NOT CI and no remote repo, publish => publishToMavenLocal */
+    tasks.matching { it.name == "publish" }.configureEach {
+        if (!locIsCi && !locHasRemoteRepo) {
+            dependsOn("publishToMavenLocal")
+        }
     }
 }
-/* --- END OF: common sniplet for repo publishment --- */
+
+/* Disable publishing tasks in root completely */
+if (project == rootProject) {
+    tasks.withType<PublishToMavenRepository>().configureEach { enabled = false }
+    tasks.matching { it.name == "publish" || it.name == "publishToMavenLocal" }.configureEach { enabled = false }
+}
+
+/* --- END OF: common sniplet for build.gradle.kts in repo root --- */
+
+allprojects {
+    group = "eu.algites.tool.java"
+    version = "0.0.1-SNAPSHOT"
+}

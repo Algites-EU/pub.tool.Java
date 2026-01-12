@@ -1,3 +1,9 @@
+plugins {
+    `maven-publish`
+    `kotlin-dsl`
+    `java-gradle-plugin`
+}
+
 java {
     sourceSets {
         val main by getting {
@@ -11,12 +17,13 @@ java {
     }
 }
 
-group = "eu.algites.tool.build"
+group = "eu.algites.tool.devops"
 
 base {
-    archivesName.set("pub.gov.Algites_build.model.intf")
+    archivesName.set("pub.tool.Java_devops.build.model.common")
 }
 
+val ALGITES_LIB_JAVA_VERSION = "0.0.1-SNAPSHOT"
 val TESTNG_VERSION = "7.11.0"
 val JAKARTA_ANNOTATION_VERSION = "3.0.0"
 val JACKSON_VERSION = "3.0.3"
@@ -26,32 +33,5 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api:" + JAKARTA_ANNOTATION_VERSION)
     implementation("tools.jackson.core:jackson-databind:" + JACKSON_VERSION)
     implementation("tools.jackson.dataformat:jackson-dataformat-yaml:" + JACKSON_VERSION)
-}
-
-plugins {
-    `maven-publish`
-    `kotlin-dsl`
-    `java-gradle-plugin`
-}
-
-publishing {
-
-    publications {
-
-        create<MavenPublication>("policyParentPom") {
-
-            groupId = project.group.toString()
-            artifactId = "${base.archivesName.get()}"
-            version = project.version.toString()
-
-            pom {
-                packaging = "pom"
-                name.set("Algites DevOps Build Model")
-                description.set(
-                    "Generated Algites DevOps build model intf classes."
-                )
-            }
-        }
-    }
-
+    implementation("eu.algites.lib.common:pub.lib.Java_util.common:" + ALGITES_LIB_JAVA_VERSION)
 }
