@@ -1,7 +1,6 @@
 package eu.algites.tool.build.model.common.intf;
 
 import eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledArtifact;
-import eu.algites.tool.build.model.artifact.intf.AIiControlledAggregatorArtifact;
 import eu.algites.tool.build.model.repository.intf.AIiSourceRepository;
 
 import java.util.Map;

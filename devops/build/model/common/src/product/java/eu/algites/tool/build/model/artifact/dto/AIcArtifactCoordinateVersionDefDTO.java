@@ -1,10 +1,5 @@
 package eu.algites.tool.build.model.artifact.dto;
 
-import static eu.algites.tool.build.model.utils.AIsArtifactModelUtils.toCoordinateId;
-
-import eu.algites.tool.build.model.artifact.intf.AInArtifactKind;
-import eu.algites.tool.build.model.common.dto.AIcArtifactContainerDefDTO;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

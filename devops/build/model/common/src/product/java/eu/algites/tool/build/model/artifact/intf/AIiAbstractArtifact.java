@@ -22,23 +22,6 @@ import java.util.Set;
 public interface AIiAbstractArtifact extends AIiArtifactCoordinate {
 
 	/**
-	 * Gets the class of the artifact
-	 * @return the class of the artifact
-	 */
-	default AInArtifactClass getArtifactClass() {
-		return getArtifactKind() == null
-				? AInArtifactClass.UNDEFINED
-				: getArtifactKind().getArtifactClass();
-	}
-
-	/**
-	 * Gets the kind of the artifact
-	 *
-	 * @return the kind of the artifact.
-	 */
-	AInArtifactKind getArtifactKind();
-
-	/**
 	 * Gets the defined outputs of the artifact
 	 * @return outputs, defined for the artifact.
 	 */

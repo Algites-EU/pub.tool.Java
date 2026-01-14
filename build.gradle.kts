@@ -115,6 +115,6 @@ if (project == rootProject) {
 /* --- END OF: common sniplet for build.gradle.kts in repo root --- */
 
 allprojects {
-    group = "eu.algites.tool.java"
+    group = "eu.algites.tool"
     version = "0.0.1-SNAPSHOT"
 }

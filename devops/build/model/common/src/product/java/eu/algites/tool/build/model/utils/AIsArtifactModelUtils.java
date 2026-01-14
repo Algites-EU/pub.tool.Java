@@ -2,7 +2,6 @@ package eu.algites.tool.build.model.utils;
 
 import static eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledArtifact.ARTIFACT_CONFIG_FILE_NAME_WITHOUT_EXT;
 
-import eu.algites.tool.build.model.artifact.intf.AInArtifactKind;
 import eu.algites.tool.build.model.common.intf.AIcContainedArtifactLocalKey;
 
 import java.nio.file.Files;

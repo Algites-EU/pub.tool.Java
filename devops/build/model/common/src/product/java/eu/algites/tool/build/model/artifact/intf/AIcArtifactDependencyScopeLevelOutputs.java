@@ -22,11 +22,11 @@ import static eu.algites.lib.common.object.stringoutput.AIsStringOutputUtils.isU
  */
 public class AIcArtifactDependencyScopeLevelOutputs {
 	private final AInArtifactKind artifactKind;
-	private final AInArtifactOutputPackagingClass packagingClass;
+	private final AInArtifactOutputPackaging packagingClass;
 
 	public AIcArtifactDependencyScopeLevelOutputs(
 			final AInArtifactKind aArtifactKind,
-			final AInArtifactOutputPackagingClass aPackagingClass) {
+			final AInArtifactOutputPackaging aPackagingClass) {
 		artifactKind = aArtifactKind;
 		packagingClass = aPackagingClass;
 	}
@@ -41,7 +41,7 @@ public class AIcArtifactDependencyScopeLevelOutputs {
 	/**
 	 * @return the packagingClass
 	 */
-	public AInArtifactOutputPackagingClass getPackagingClass() {
+	public AInArtifactOutputPackaging getPackagingClass() {
 		return packagingClass;
 	}
 

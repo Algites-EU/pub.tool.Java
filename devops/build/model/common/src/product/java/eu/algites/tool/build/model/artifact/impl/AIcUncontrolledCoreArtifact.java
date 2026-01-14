@@ -1,7 +1,6 @@
 package eu.algites.tool.build.model.artifact.impl;
 
 import eu.algites.tool.build.model.artifact.intf.AIiUncontrolledCoreArtifact;
-import eu.algites.tool.build.model.artifact.intf.AInArtifactKind;
 
 /**
  * Mutable POJO implementation of {@link AIiUncontrolledCoreArtifact}.

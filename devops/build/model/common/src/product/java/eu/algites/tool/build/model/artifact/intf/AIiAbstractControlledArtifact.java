@@ -23,6 +23,14 @@ import java.nio.file.Path;
  */
 public interface AIiAbstractControlledArtifact extends AIiAbstractDefinedArtifact {
 
+	/**
+	 * Gets the class of the artifact
+	 * @return the class of the artifact
+	 */
+	default AInArtifactClass getArtifactClass() {
+		return AInArtifactClass.CONTROLLED;
+	}
+
 	String ARTIFACT_CONFIG_FILE_NAME_WITHOUT_EXT = "algites-artifact";
 
 	/**

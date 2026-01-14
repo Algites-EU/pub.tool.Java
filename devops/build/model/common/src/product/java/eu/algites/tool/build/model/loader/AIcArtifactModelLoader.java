@@ -4,7 +4,6 @@ import static eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledArt
 import static eu.algites.tool.build.model.artifact.intf.AInArtifactKind.AGGREGATOR;
 import static eu.algites.tool.build.model.artifact.intf.AInArtifactKind.DEPENDENCY_DEFINITION_POLICY;
 import static eu.algites.tool.build.model.repository.intf.AIiSourceRepository.SOURCE_REPOSITORY_CONFIG_FILE_NAME_WITHOUT_EXT;
-import static eu.algites.tool.build.model.utils.AIsArtifactModelUtils.UNSPECIFIED_VERSION_PLACEHOLDER;
 import static eu.algites.tool.build.model.utils.AIsArtifactModelUtils.filenameWithoutExtension;
 import static eu.algites.tool.build.model.utils.AIsArtifactModelUtils.resolveArtificialArtifactId;
 
@@ -33,8 +32,6 @@ import eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledArtifact;
 import eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledCoreArtifact;
 import eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledParentRwContainerArtifact;
 import eu.algites.tool.build.model.artifact.intf.AIiArtifactDependency;
-import eu.algites.tool.build.model.artifact.intf.AIiControlledAggregatorArtifact;
-import eu.algites.tool.build.model.artifact.intf.AInArtifactKind;
 import eu.algites.tool.build.model.common.dto.AIcArtifactContainerDefDTO;
 import eu.algites.tool.build.model.common.dto.AIcCommonHolderDefDTO;
 import eu.algites.tool.build.model.common.intf.AIcContainedArtifactLocalKey;

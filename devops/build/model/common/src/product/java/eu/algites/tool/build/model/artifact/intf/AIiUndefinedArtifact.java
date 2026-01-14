@@ -20,13 +20,12 @@ package eu.algites.tool.build.model.artifact.intf;
 public interface AIiUndefinedArtifact extends AIiAbstractVersionedArtifact {
 
 	/**
-	 * Gets the kind of the artifact of the class {@link AInArtifactClass#UNDEFINED}
-	 * which is null
-	 * @return null kind of the artefact (for type unknown yet)
+	 * Gets the class of the artifact
+	 * @return the class of the artifact
 	 */
-	@Override
-	default AInArtifactKind getArtifactKind() {
-		return null;
+	default AInArtifactClass getArtifactClass() {
+		return AInArtifactClass.UNDEFINED;
 	}
+
 
 }

@@ -1,7 +1,5 @@
 package eu.algites.tool.build.model.artifact.dto;
 
-import eu.algites.tool.build.model.artifact.intf.AInArtifactKind;
-
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

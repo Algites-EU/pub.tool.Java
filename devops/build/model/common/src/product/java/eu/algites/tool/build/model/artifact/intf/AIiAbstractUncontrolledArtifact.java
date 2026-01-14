@@ -19,4 +19,13 @@ package eu.algites.tool.build.model.artifact.intf;
  */
 public interface AIiAbstractUncontrolledArtifact extends AIiAbstractVersionedArtifact, AIiAbstractDefinedArtifact {
 
+	/**
+	 * Gets the class of the artifact
+	 * @return the class of the artifact
+	 */
+	default AInArtifactClass getArtifactClass() {
+		return AInArtifactClass.UNCONTROLLED;
+	}
+
+
 }

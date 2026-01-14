@@ -19,10 +19,6 @@ java {
 
 group = "eu.algites.tool.devops"
 
-base {
-    archivesName.set("pub.tool.Java_devops.build.model.common")
-}
-
 val ALGITES_LIB_JAVA_VERSION = "0.0.1-SNAPSHOT"
 val TESTNG_VERSION = "7.11.0"
 val JAKARTA_ANNOTATION_VERSION = "3.0.0"

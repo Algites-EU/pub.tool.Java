@@ -3,9 +3,6 @@ package eu.algites.tool.build.model.artifact.impl;
 import eu.algites.tool.build.model.artifact.intf.AIiAbstractArtifact;
 import eu.algites.tool.build.model.artifact.intf.AIiAbstractControlledParentRwContainerArtifact;
 import eu.algites.tool.build.model.artifact.intf.AIiArtifactDependency;
-import eu.algites.tool.build.model.artifact.intf.AIiControlledDependencyDefinitionPolicyArtifact;
-import eu.algites.tool.build.model.artifact.intf.AIiControlledProductInterfaceBomArtifact;
-import eu.algites.tool.build.model.artifact.intf.AIiControlledProductVariantBomArtifact;
 
 import java.util.List;
 import java.util.Objects;

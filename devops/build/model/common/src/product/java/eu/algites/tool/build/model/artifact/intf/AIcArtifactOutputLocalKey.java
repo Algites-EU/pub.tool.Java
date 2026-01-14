@@ -20,7 +20,7 @@ public final class AIcArtifactOutputLocalKey {
 	/**
 	 * Exclusive constructor
 	 * @param aOutputClassifier classifier for the output. The default classifier is null for the artifact of the builtin class
-	 *    {@link AInArtifactBuiltinOutputClass#DEFAULT_MAIN}
+	 *    {@link AInArtifactBuiltinOutputType#DEFAULT_MAIN}
 	 * @param aOutputPackagingId the packaging of the output
 	 */
 	public AIcArtifactOutputLocalKey(final String aOutputClassifier, final @Nonnull String aOutputPackagingId) {
@@ -43,8 +43,8 @@ public final class AIcArtifactOutputLocalKey {
 
 	/**
 	 * Gets the identification of the type of the output (jar/pom, etc.) In the case of the internal artifacts or just the known types like
-	 * represented by {@link AInArtifactOutputPackagingClass#getKnownOutputTypeClasses()} it should return the same code like has
-	 * {@link AInArtifactOutputPackagingClass#getAssignedOutputPackagingId()}
+	 * represented by {@link AInArtifactOutputPackaging#getKnownOutputTypeClasses()} it should return the same code like has
+	 * {@link AInArtifactOutputPackaging#getAssignedOutputPackagingId()}
 	 *
 	 * @return the id of the type of the output.
 	 */
