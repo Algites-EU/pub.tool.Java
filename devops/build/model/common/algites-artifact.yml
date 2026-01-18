@@ -1,0 +1,233 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/refs/heads/main/schemas/json/devops/build/1.0.0/artifact.schema.json
+
+artifact:
+  groupId: eu.algites.tool.devops
+  artifactId: pub.tool.Java_devops.build.model.common
+
+  parent:
+    groupId: eu.algites.lib
+    artifactId: util-common
+    outputType: "builtin:::pom"
+
+  name: Common build structure model definition artifact
+  description: |
+    Contains the structures necessary for handling of repositories and artifacts 
+    in them in Algites style
+  containedArtifactRelativePaths:
+    - intf
+    - impl
+
+
+  properties:
+    includedTemplateUids:
+      - myVersionsTemplate
+
+    defs:
+      - devops.prop: test123
+      - gversion: 1.2.3
+
+  outputs:
+    - outputType: builtin:::pom
+
+
+  dependencies:
+    # ------------------------------------------------------------
+    # CONTROLLED dependencies (no version here; resolved via VersionContext)
+    # ------------------------------------------------------------
+    - templateUid: log4jStandard
+    - artifact:
+        groupId: eu.algites.lib
+        artifactId: util-common
+        outputType: builtin:::jar
+
+      scopeRules:
+        # 1) Main compile, exported to consumers as compile => Gradle 'api'
+        - templateUid: gradleApi
+          weight: 0
+
+        # 2) Test compile only (not exported) => Gradle 'testImplementation'
+        - templateUid: gradleTestImplementation
+          weight: 0
+
+        # 3) Same dependency also used at runtime for main (extra rule)
+        #    Here we show an explicit form (no template).
+        #    This is allowed if your model permits multiple apply items
+        #    for the same (usage, sourceSet) OR you model them as
+        #    separate "slots". For MVP you may forbid this and require
+        #    users to merge into one rule.
+        - usage: classpathItem
+          sourceSet: MAIN_ONLY
+          behavior:
+            importUse:
+              runtime: true
+          weight: -10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+
+        # 4) Prepare for future: sourceProcessor (structure exists, not implemented yet)
+        - usage: sourceProcessor
+          sourceSet: MAIN_ONLY
+          behavior:
+            importUse:
+              compile: true
+          weight: -50
+
+
+    # ------------------------------------------------------------
+    # UNCONTROLLED dependency (version specified directly)
+    # Typical: external libs.
+    # ------------------------------------------------------------
+    - artifact:
+        groupId: org.postgresql
+        artifactId: postgresql
+        outputType: builtin:::jar
+
+        # uncontrolled version rule (simple MVP form)
+        version: "42.7.4"
+
+      scopeRules:
+        # Main runtime only (driver should not be on compile API)
+        - templateUid: gradleRuntimeOnly
+          weight: 0
+
+        # But tests may compile against it (example: integration tests)
+        - usage: classpathItem
+          sourceSet: TEST_ONLY
+          behavior:
+            importUse:
+              compile: true
+          weight: 10
+
+
+    # ------------------------------------------------------------
+    # STEERING ONLY (exportAs: manage)
+    # No classpath usage, just export constraints/intents to consumers.
+    # (E.g. PIBOM/PVBOM use-cases.)
+    # ------------------------------------------------------------
+    - artifact:
+        groupId: com.fasterxml.jackson.core
+        artifactId: jackson-databind
+        outputType: "builtin:::jar"
+
+        version:
+          range: "[2.15.0, 3.0.0)"
+          preferred: "2.17.2"
+
+      scopeRules:
+        # Export as "manage" (constraints/steering) for main consumers
+        - usage: classpathItem
+          sourceSet: MAIN_ONLY
+          behavior:
+            exportUse:
+              manage: true
+          weight: 0
+
+        # Optional: tests in this module still want it on classpath
+        # (shows coexistence of steering + local test usage)
+        - templateUid: gradleTestImplementation
+          weight: -20
+
+
+    # ------------------------------------------------------------
+    # Another example: explicit-only rules, no templates
+    # ------------------------------------------------------------
+    - artifact:
+        groupId: org.slf4j
+        artifactId: slf4j-api
+        outputType: builtin:::jar
+        version: "2.0.16"
+
+      scopeRules:
+        - usage: classpathItem
+          sourceSet: MAIN_ONLY
+          behavior:
+            importUse:
+              compile: true
+            exportUse:
+              compile: true
+              manage: true
+          weight: 0
+
+        - usage: classpathItem
+          sourceSet: TEST_ONLY
+          behavior:
+            importUse:
+              compile: true
+          weight: 0
+
+versionContext:
+  versionContextId: devops-build-model-common-version-context
+  releaseLine: "1"
+  revisionStringSize: 2
+  revision: 0
+  qualifier:
+    kind: SNAPSHOT
+    label: "SNAPSHOT"
+
+
+
+projectPropertiesTemplates:
+  - templateUid: myVersionsTemplate
+    includedTemplateUids:
+      - my-imported-template
+    defs:
+      - my.version: "1.2.3"
+      - log4j.version: "2.17.2"
+      - my.structured.version:
+          item1: 1213
+          item2: 987
+
+
+dependencyScopeRuleTemplates:
+  - templateUid: accessMainRuntimeInTestScope
+    includedTemplateUids:
+      - myDepScopeRulesTemplate
+    scopeRules:
+      - usage: classpathItem
+        sourceSet: MAIN_ONLY
+        behavior:
+          importUse:
+            runtime: true
+          exportUse:
+            runtime: true
+            manage: true
+      - usage: classpathItem
+        sourceSet: TEST_ONLY
+        behavior:
+          importUse:
+            compile: true
+          exportUse:
+            manage: true
+        locked: true
+        weight: 10
+
+dependenciesTemplates:
+  - templateUid: log4jStandard
+    includedTemplateUids:
+      - myDepScopeRulesTemplate
+    dependencies:
+      - artifact:
+          groupId: log4j
+          artifactId: log4jimpl
+          outputType: builtin:::jar
+          version: "${log4j.version}"
+
+        scopeRules:
+          - usage: classpathItem
+            sourceSet: MAIN_ONLY
+            behavior:
+              importUse:
+                compile: true
+              exportUse:
+                compile: true
+                manage: true
+            weight: 0
+
+          - usage: classpathItem
+            sourceSet: TEST_ONLY
+            behavior:
+              importUse:
+                compile: true
+                runtime: true
+              exportUse:
+                compile: true
+            weight: 0
+

@@ -112,6 +112,36 @@ if (project == rootProject) {
     tasks.matching { it.name == "publish" || it.name == "publishToMavenLocal" }.configureEach { enabled = false }
 }
 
+allprojects {
+    configurations.configureEach {
+        resolutionStrategy.dependencySubstitution {
+            all {
+                val locRequested = requested
+                if (locRequested is org.gradle.api.artifacts.component.ModuleComponentSelector) {
+
+                    val locRootName = rootProject.name
+                    val locModule = locRequested.module
+                    val locGroup = locRequested.group
+
+                    val locExpectedPrefix = "${locRootName}_"
+                    val locMatchesRepo = (locModule == locRootName || locModule.startsWith(locExpectedPrefix))
+                    val locMatchesGroup = (locGroup == project.group.toString())
+
+                    if (locMatchesRepo && locMatchesGroup) {
+                        val locPathDots = if (locModule == locRootName) "" else locModule.removePrefix(locExpectedPrefix)
+                        val locProjectPath = if (locPathDots.isBlank()) ":" else ":" + locPathDots.replace('.', ':')
+
+                        val locTargetProject = rootProject.findProject(locProjectPath)
+                        if (locTargetProject != null) {
+                            useTarget(locTargetProject)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 /* --- END OF: common sniplet for build.gradle.kts in repo root --- */
 
 allprojects {

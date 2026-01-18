@@ -40,4 +40,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "pub.tool.Java"
-include(":devops:build:model:common")
+include(":devops:build:model:common:intf")
+include(":devops:build:model:common:impl")

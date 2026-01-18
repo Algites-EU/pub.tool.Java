@@ -1,11 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/refs/heads/main/schemas/json/devops/build/1.0.0/source-repository.schema.json
+
 sourceRepository:
-  id: pub.tool.Java
-  name: Algites public Java Tools repository
+  repositoryId: pub.tool.Java
+  name: Algites public Java Tools srcrepo
+  description: Public Java tools for Algites
   containedArtifactRelativePaths:
     - devops/build/model/common
 
+
 versionContext:
+  versionContextId: central-repo-version-context
   releaseLine: "1"
+  revisionStringSize: 2
   revision: 0
-  qualifierKind: SNAPSHOT
-  qualifierLabel: SNAPSHOT
+  qualifier:
+    kind: SNAPSHOT
+    label: "SNAPSHOT"
+
+templateUrls:
+  - https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/main/devops/build/model/common/my-test-template-1.0.0.yml
