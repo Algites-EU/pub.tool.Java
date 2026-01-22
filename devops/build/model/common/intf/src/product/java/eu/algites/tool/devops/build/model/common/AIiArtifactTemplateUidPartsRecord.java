@@ -1,5 +1,7 @@
 package eu.algites.tool.devops.build.model.common;
 
+import eu.algites.lib.common.enumdata.AIiUidPartsRecord;
+
 /**
  * <p>
  * Title: {@link AIiArtifactTemplateUidPartsRecord}
@@ -17,7 +19,7 @@ package eu.algites.tool.devops.build.model.common;
  * @author linhart1
  * @date 16.01.26 14:34
  */
-public interface AIiArtifactTemplateUidPartsRecord extends AIiArtifactUidPartsRecord {
+public interface AIiArtifactTemplateUidPartsRecord extends AIiUidPartsRecord {
 	/**
 	 * @return the classifier
 	 */

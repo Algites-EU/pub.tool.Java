@@ -1,5 +1,7 @@
 package eu.algites.tool.devops.build.model.artifact;
 
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependency;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

@@ -17,7 +17,7 @@ java {
     }
 }
 
-group = "eu.algites.tool.devops"
+group = "eu.algites.pltf.knitstro"
 
 val ALGITES_LIB_JAVA_VERSION = "0.0.1-SNAPSHOT"
 val TESTNG_VERSION = "7.11.0"

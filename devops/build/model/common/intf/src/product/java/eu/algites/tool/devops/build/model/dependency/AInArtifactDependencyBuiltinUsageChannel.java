@@ -1,4 +1,4 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * <p>
- * Title: {@link AInDependencyBuiltinUsageChannel}
+ * Title: {@link AInArtifactDependencyBuiltinUsageChannel}
  * </p>
  * <p>
  * Description: Contains the definition of the usage channel for the dependencies
@@ -23,13 +23,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author linhart1
  * @date 11.01.26 7:47
  */
-public enum AInDependencyBuiltinUsageChannel {
-	CLASSPATH_ITEM("builtin::classpathItem"),
-	SOURCE_PROCESSOR("builtin::sourceProcessor"),
+public enum AInArtifactDependencyBuiltinUsageChannel {
+	SOURCE_PROCESSOR("builtin::source-processor"),
+	COMPILATION("builtin::compilation"),
+	COMPILATION_POSTPROCESSING("builtin::compilation-postprocessing"),
+	RUNTIME("builtin::runtime"),
   ;
 	private final String code;
 
-	AInDependencyBuiltinUsageChannel(final String aCode) {
+	AInArtifactDependencyBuiltinUsageChannel(final String aCode) {
 		code = aCode;
 	}
 
@@ -47,8 +49,8 @@ public enum AInDependencyBuiltinUsageChannel {
 	 * @throws IllegalArgumentException if the code is not null but unknown
 	 */
 	@JsonCreator
-	public static AInDependencyBuiltinUsageChannel getByCodeOrThrow(final String aCode) throws IllegalArgumentException {
-		final AInDependencyBuiltinUsageChannel value = findByCode(aCode);
+	public static AInArtifactDependencyBuiltinUsageChannel getByCodeOrThrow(final String aCode) throws IllegalArgumentException {
+		final AInArtifactDependencyBuiltinUsageChannel value = findByCode(aCode);
 		if (value != null)
 			return value;
 		throw new IllegalArgumentException("Unknown usage: " + aCode);
@@ -58,8 +60,8 @@ public enum AInDependencyBuiltinUsageChannel {
 	 * @param aCode code to be searched for
 	 * @return the enum value or null if not found
 	 */
-	public static @Nullable AInDependencyBuiltinUsageChannel findByCode(final String aCode) {
-		for (AInDependencyBuiltinUsageChannel locValue : values()) {
+	public static @Nullable AInArtifactDependencyBuiltinUsageChannel findByCode(final String aCode) {
+		for (AInArtifactDependencyBuiltinUsageChannel locValue : values()) {
 			if (locValue.getCode().equalsIgnoreCase(aCode)) {
 				return locValue;
 			}

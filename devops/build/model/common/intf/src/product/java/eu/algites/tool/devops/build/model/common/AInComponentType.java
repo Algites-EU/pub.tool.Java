@@ -1,8 +1,18 @@
 package eu.algites.tool.devops.build.model.common;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
-import static eu.algites.tool.devops.build.model.common.AIsComponentUtils.AIcComponentUidPartMetadataRecord
+import static eu.algites.tool.devops.build.model.common.AIsComponentUtils.AIcComponentUidPartMetadataRecord;
+
+import eu.algites.lib.common.enumdata.AIiGloballyUniqueEnumDataType;
+import eu.algites.lib.common.enumdata.AIiUidPartsRecord;
+import eu.algites.lib.common.enumdata.AInEnumDataOrigin;
+import eu.algites.lib.common.enumdata.AIrUidPartMetadata;
+
+import org.gradle.internal.impldep.org.apache.commons.lang3.function.TriFunction;
+
 /**
  * <p>
  * Title: {@link AInComponentType}
@@ -20,16 +30,14 @@ import static eu.algites.tool.devops.build.model.common.AIsComponentUtils.AIcCom
  * @author linhart1
  * @date 13.01.26 17:00
  */
-public enum AInComponentType {
+public enum AInComponentType implements AIiGloballyUniqueEnumDataType<AIiUidPartsRecord> {
 	OUTPUT_TYPE("OUTPUT_TYPE",
 			List.of(
-					new AIcComponentUidPartMetadataRecord("class", true, true),
-					new AIcComponentUidPartMetadataRecord("namespace", false, true),
-					new AIcComponentUidPartMetadataRecord("classifier", false, false),
-					new AIcComponentUidPartMetadataRecord("packaging-file-type", true, true)),
+					new AIrUidPartMetadata("classifier", /* not required: */ Collections.emptyMap()),
+					new AIrUidPartMetadata("packaging-file-type", Map.of(AInEnumDataOrigin.BUILTIN, true, AInEnumDataOrigin.CUSTOM, true)),
 			AInArtifactBuiltinOutputType.class,
 			aStrings -> new AIsComponentUtils.AIcArtifactOutputTypeUidPartsRecord(
-					AInComponentOriginClass.getByCodeOrThrow(aStrings[0]),
+					AInEnumDataOrigin.getByCodeOrThrow(aStrings[0]),
 					aStrings[1], aStrings[2], aStrings[3]), AInArtifactBuiltinOutputType::getByUidOrThrow),
 	DEPENDENCY_SCOPE_RULE_TEMPLATE(
 			"DEPENDENCY_SCOPE_RULE_TEMPLATE",
@@ -37,27 +45,27 @@ public enum AInComponentType {
 					new AIcComponentUidPartMetadataRecord("class", true, true),
 					new AIcComponentUidPartMetadataRecord("namespace", false, true),
 					new AIcComponentUidPartMetadataRecord("template-id", true, true)),
-			AInArtifactBuiltinDependencyScopeRuleTemplate.class,
+			AInArtifactBuiltinDependencyScopeBindingTemplate.class,
 			aStrings -> new AIsComponentUtils.AIcArtifactTemplateUidPartsRecord(
-					AInComponentOriginClass.getByCodeOrThrow(aStrings[0]),
+					AInEnumDataOrigin.getByCodeOrThrow(aStrings[0]),
 					aStrings[1], aStrings[2]),
-			AInArtifactBuiltinDependencyScopeRuleTemplate::getByUidOrThrow);
+			AInArtifactBuiltinDependencyScopeBindingTemplate::getByUidOrThrow);
 
 	private final String code;
 
-	private final List<AIcComponentUidPartMetadataRecord> uidSegmentMetadata;
+	private final List<AIcComponentUidPartMetadataRecord> specificUidPartsMetadata;
 	private final Class<?> builtinEnumClass;
-	private final Function<String[], AIiArtifactUidPartsRecord> customRecordConstructor;
-	private final Function<String, AIiArtifactUidPartsRecord> builtinRecordConstructor;
+	private final Function<String[], AIiUidPartsRecord> customRecordConstructor;
+	private final Function<String, AIiUidPartsRecord> builtinRecordConstructor;
 
 	public static final int COMPONENT_CLASS_UID_POSITION = 0;
 	public static final int NAMESPACE_UID_POSITION = 1;
 
-	AInComponentType(String aCode, final List<AIcComponentUidPartMetadataRecord> aUidSegmentMetadata,
-			Class<?> aBuiltinEnumClass, Function<String[], AIiArtifactUidPartsRecord> aCustomRecordConstructor,
-			final Function<String, AIiArtifactUidPartsRecord> aBuiltinRecordConstructor) {
+	AInComponentType(String aCode, final List<AIcComponentUidPartMetadataRecord> aSpecificUidPartsMetadata,
+			Class<?> aBuiltinEnumClass, Function<String[], AIiUidPartsRecord> aCustomRecordConstructor,
+			final Function<String, AIiUidPartsRecord> aBuiltinRecordConstructor) {
 		code = aCode;
-		uidSegmentMetadata = aUidSegmentMetadata;
+		specificUidPartsMetadata = aSpecificUidPartsMetadata;
 		builtinEnumClass = aBuiltinEnumClass;
 
 		customRecordConstructor = aCustomRecordConstructor;
@@ -71,41 +79,14 @@ public enum AInComponentType {
 		return code;
 	}
 
-	/**
-	 * @return the uidSegmentCount
-	 */
-	public int getUidSegmentCount() {
-		return uidSegmentMetadata.size();
+
+	@Override
+	public TriFunction<AIiGloballyUniqueEnumDataType, String, List<String>, AIiUidPartsRecord> getUidRecordConstructor() {
+		return null;
 	}
 
-	/**
-	 * Gets the list of the metadata records. The order of the entries corresponds with the order of the segments in the UID.
-	 * @return the uidSegmentMetadata
-	 */
-	public List<AIcComponentUidPartMetadataRecord> getUidSegmentMetadata() {
-		return uidSegmentMetadata;
+	@Override
+	public List<AIcComponentUidPartMetadataRecord> getSpecificUidPartsMetadata() {
+		return specificUidPartsMetadata;
 	}
-
-	/**
-	 * @return the builtinEnumClass
-	 */
-	public Class<?> getBuiltinEnumClass() {
-		return builtinEnumClass;
-	}
-
-	/**
-	 * @return the customRecordConstructor
-	 */
-	public Function<String[], AIiArtifactUidPartsRecord> getCustomRecordConstructor() {
-		return customRecordConstructor;
-	}
-
-	/**
-	 * @return the builtinRecordConstructor
-	 */
-	public Function<String, AIiArtifactUidPartsRecord> getBuiltinRecordConstructor() {
-		return builtinRecordConstructor;
-	}
-
-
 }

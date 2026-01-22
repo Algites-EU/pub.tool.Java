@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependency;
 import jakarta.annotation.Nonnull;
 
 public class AIcControlledArtifact extends AIcAbstractArtifact implements AIiControlledArtifact {

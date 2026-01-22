@@ -1,7 +1,7 @@
 package eu.algites.tool.devops.build.model.common.dto;
 
-import eu.algites.tool.devops.build.model.artifact.AInDependencyBuiltinSourceSet;
-import eu.algites.tool.devops.build.model.artifact.AInDependencyBuiltinUsageChannel;
+import eu.algites.tool.devops.build.model.dependency.AInArtifactDependencyBuiltinSourceSet;
+import eu.algites.tool.devops.build.model.dependency.AInArtifactDependencyBuiltinUsageChannel;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,10 +17,10 @@ public class AIcDependencyScopeRuleDefDTO {
     private String templateId;
 
     @JsonProperty("usage")
-    private AInDependencyBuiltinUsageChannel usage;
+    private AInArtifactDependencyBuiltinUsageChannel usage;
 
     @JsonProperty("sourceSet")
-    private AInDependencyBuiltinSourceSet sourceSet;
+    private AInArtifactDependencyBuiltinSourceSet sourceSet;
 
     @JsonProperty("behavior")
     private AIcDependencyScopeRuleBehaviorDefDTO behavior;
@@ -39,19 +39,19 @@ public class AIcDependencyScopeRuleDefDTO {
         templateId = aTemplateId;
     }
 
-    public AInDependencyBuiltinUsageChannel getUsage() {
+    public AInArtifactDependencyBuiltinUsageChannel getUsage() {
         return usage;
     }
 
-    public void setUsage(AInDependencyBuiltinUsageChannel aUsage) {
+    public void setUsage(AInArtifactDependencyBuiltinUsageChannel aUsage) {
         usage = aUsage;
     }
 
-    public AInDependencyBuiltinSourceSet getSourceSet() {
+    public AInArtifactDependencyBuiltinSourceSet getSourceSet() {
         return sourceSet;
     }
 
-    public void setSourceSet(AInDependencyBuiltinSourceSet aSourceSet) {
+    public void setSourceSet(AInArtifactDependencyBuiltinSourceSet aSourceSet) {
         sourceSet = aSourceSet;
     }
 

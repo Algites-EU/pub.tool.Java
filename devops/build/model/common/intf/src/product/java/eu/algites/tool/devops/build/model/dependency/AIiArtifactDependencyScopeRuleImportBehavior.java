@@ -1,8 +1,8 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
 
 /**
  * <p>
- * Title: {@link AIiArtifactDependencyScopeRuleExportBehavior}
+ * Title: {@link AIiArtifactDependencyScopeRuleImportBehavior}
  * </p>
  * <p>
  * Description: Defines the export behavior
@@ -18,10 +18,6 @@ package eu.algites.tool.devops.build.model.artifact;
  * @author linhart1
  * @date 18.01.26 15:28
  */
-public interface AIiArtifactDependencyScopeRuleExportBehavior extends AIiArtifactDependencyScopeRuleBehavior {
-
-	Boolean getUseForManagement();
-
-
+public interface AIiArtifactDependencyScopeRuleImportBehavior extends AIiArtifactDependencyScopeRuleBehavior {
 
 }

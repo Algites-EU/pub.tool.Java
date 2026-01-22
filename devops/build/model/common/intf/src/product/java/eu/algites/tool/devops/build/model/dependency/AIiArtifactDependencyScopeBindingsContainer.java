@@ -1,13 +1,13 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
 
 import java.util.List;
 
 /**
  * <p>
- * Title: {@link AIiArtifactDependencyScopeRulesContainer}
+ * Title: {@link AIiArtifactDependencyScopeBindingsContainer}
  * </p>
  * <p>
- * Description: TODO: Add description
+ * Description: Contains multiple bindings
  * </p>
  * <p>
  * Copyright: Copyright (c) 2026 Artur Linhart, Algites
@@ -19,11 +19,11 @@ import java.util.List;
  * @author linhart1
  * @date 18.01.26 18:01
  */
-public interface AIiArtifactDependencyScopeRulesContainer {
+public interface AIiArtifactDependencyScopeBindingsContainer {
 	/**
 	 * Gets the dependency scope
 	 *
 	 * @return the dependency scope
 	 */
-	List<AIiArtifactDependencyScopeRule> getScopeRules();
+	List<AIiArtifactDependencyScopeBinding> getBindings();
 }

@@ -2,6 +2,7 @@ package eu.algites.tool.devops.build.model.artifact;
 
 import eu.algites.tool.devops.build.model.common.AIiAbstractArtifactContainer;
 import eu.algites.tool.devops.build.model.common.version.AIiVersionContext;
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependency;
 
 import java.nio.file.Path;
 import java.util.List;

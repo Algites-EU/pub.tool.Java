@@ -145,6 +145,6 @@ allprojects {
 /* --- END OF: common sniplet for build.gradle.kts in repo root --- */
 
 allprojects {
-    group = "eu.algites.tool"
+    group = "eu.algites.pltf.knitstro"
     version = "0.0.1-SNAPSHOT"
 }

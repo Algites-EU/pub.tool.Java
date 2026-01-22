@@ -1,8 +1,8 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
 
 /**
  * <p>
- * Title: {@link AIiArtifactDependencyScopeRule}
+ * Title: {@link AIiArtifactDependencyScopeBinding}
  * </p>
  * <p>
  * Description: Defines the rule for the dependency scope
@@ -17,11 +17,11 @@ package eu.algites.tool.devops.build.model.artifact;
  * @author linhart1
  * @date 18.01.26 15:28
  */
-public interface AIiArtifactDependencyScopeRule {
+public interface AIiArtifactDependencyScopeBinding {
 
-	AInDependencyBuiltinUsageChannel getUsage();
+	AInArtifactDependencyBuiltinUsageChannel getUsage();
 
-	AInDependencyBuiltinSourceSet getSourceSet();
+	AInArtifactDependencyBuiltinSourceSet getSourceSet();
 
 	AIiArtifactDependencyScopeRuleBehavior getBehavior();
 

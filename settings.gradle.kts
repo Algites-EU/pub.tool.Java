@@ -39,6 +39,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "pub.tool.Java"
+rootProject.name = "pub.pltf.Knitstro"
 include(":devops:build:model:common:intf")
 include(":devops:build:model:common:impl")

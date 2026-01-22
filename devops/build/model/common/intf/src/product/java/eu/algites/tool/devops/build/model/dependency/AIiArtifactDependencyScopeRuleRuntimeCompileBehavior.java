@@ -1,4 +1,4 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
 
 /**
  * <p>

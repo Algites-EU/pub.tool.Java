@@ -17,7 +17,7 @@ java {
     }
 }
 
-group = "eu.algites.tool.devops"
+group = "eu.algites.pltf.knitstro"
 
 val ALGITES_PUB_TOOL_JAVA_VERSION = project.version.toString()
 val ALGITES_PUB_LIB_JAVA_VERSION = "0.0.1-SNAPSHOT"
@@ -30,6 +30,5 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api:" + JAKARTA_ANNOTATION_VERSION)
     implementation("tools.jackson.core:jackson-databind:" + JACKSON_VERSION)
     implementation("tools.jackson.dataformat:jackson-dataformat-yaml:" + JACKSON_VERSION)
-    api("eu.algites.tool.devops:pub.tool.Java_devops.build.model.common.intf:" + ALGITES_PUB_TOOL_JAVA_VERSION)
-    api("eu.algites.tool.devops:pub.tool.Java_devops.build.model.common:" + ALGITES_PUB_TOOL_JAVA_VERSION)
+    api("eu.algites.tool.devops:pub.pltf.Knitstro_devops.build.model.common.intf:" + ALGITES_PUB_TOOL_JAVA_VERSION)
 }

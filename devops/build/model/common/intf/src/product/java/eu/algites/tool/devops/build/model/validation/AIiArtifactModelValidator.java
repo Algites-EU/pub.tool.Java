@@ -1,9 +1,9 @@
 package eu.algites.tool.devops.build.model.validation;
 
-import eu.algites.tool.devops.build.model.artifact.AIiArtifactDependency;
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependency;
 import eu.algites.tool.devops.build.model.artifact.AIiArtifactLink;
 import eu.algites.tool.devops.build.model.artifact.AIiArtifactOutput;
-import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencyScopeRuleTemplate;
+import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencyScopeBindingTemplate;
 
 /**
  * <p>
@@ -65,7 +65,7 @@ import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencySco
  *
  * 		  <li><b>G-03 Scope allowed for owner kind (ERROR)</b><br/>
  * 		    The dependency scope level must be allowed for the <i>owner</i> artifact kind per
- *        {@link AInArtifactBuiltinDependencyScopeRuleTemplate#getAllowedForUsageInDependencyWithArtifactKinds()}.<br/>
+ *        {@link AInArtifactBuiltinDependencyScopeBindingTemplate#getAllowedForUsageInDependencyWithArtifactKinds()}.<br/>
  * 		    (Interpretation: "where a scope may be used" is a property of the usage site / owner.)</li>
  *
  * 		  <li><b>G-04 Projection consistent with target kind (ERROR)</b><br/>
@@ -81,21 +81,21 @@ import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencySco
  *
  * 		<ul>
  * 		  <li><b>I-01 IMPORT is managed-only (ERROR)</b><br/>
- * 		    If {@link AInArtifactBuiltinDependencyScopeRuleTemplate#IMPORT} is used, the dependency must be declared in MANAGED context only
+ * 		    If {@link AInArtifactBuiltinDependencyScopeBindingTemplate#IMPORT} is used, the dependency must be declared in MANAGED context only
  * 		    (dependencyManagement-style). It must not appear in DIRECT dependencies.<br/>
  * 		    This is aligned with Maven BOM-import semantics.<br/>
- * 		    (Model hint: {@link AInArtifactBuiltinDependencyScopeRuleTemplate#isUsedForManagedDependenciesOnly()}.)</li>
+ * 		    (Model hint: {@link AInArtifactBuiltinDependencyScopeBindingTemplate#isUsedForManagedDependenciesOnly()}.)</li>
  *
  * 		  <li><b>I-02 IMPORT requires POM projection (ERROR)</b><br/>
- * 		    If {@link AInArtifactBuiltinDependencyScopeRuleTemplate#IMPORT} is used, then {@link AIiArtifactOutput#getOutputPackagingId()} must be {@code "pom"}.</li>
+ * 		    If {@link AInArtifactBuiltinDependencyScopeBindingTemplate#IMPORT} is used, then {@link AIiArtifactOutput#getOutputPackagingId()} must be {@code "pom"}.</li>
  *
  * 		  <li><b>I-03 IMPORT requires an importable target (ERROR)</b><br/>
- * 		    If {@link AInArtifactBuiltinDependencyScopeRuleTemplate#IMPORT} is used, then the target kind must be an importable BOM kind,
+ * 		    If {@link AInArtifactBuiltinDependencyScopeBindingTemplate#IMPORT} is used, then the target kind must be an importable BOM kind,
  * 		    e.g. {@code POLICY_BACKGROUND_BOM}, {@code PRODUCT_INTERFACE_BOM}, {@code PRODUCT_VARIANT_BOM},
  * 		    or {@code UNCONTROLLED_BOM}.</li>
  *
  * 		  <li><b>I-04 IMPORT should not use classifier (WARN)</b><br/>
- * 		    If {@link AInArtifactBuiltinDependencyScopeRuleTemplate#IMPORT} is used, then {@link AIiArtifactOutput#getOutputClassifier()} should be empty/null.
+ * 		    If {@link AInArtifactBuiltinDependencyScopeBindingTemplate#IMPORT} is used, then {@link AIiArtifactOutput#getOutputClassifier()} should be empty/null.
  * 		    (Classifier-based BOM imports are typically discouraged.)</li>
  * 		</ul>
  *
@@ -122,7 +122,7 @@ import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencySco
  *
  * 		<ul>
  * 		  <li><b>S-01 UNCONTROLLED_BOM should primarily be used for IMPORT (WARN/ERROR)</b><br/>
- * 		    If {@code target.kind == UNCONTROLLED_BOM} and {@link AIiArtifactDependencyScope#getLevel()} is not {@link AInArtifactBuiltinDependencyScopeRuleTemplate#IMPORT}, then:
+ * 		    If {@code target.kind == UNCONTROLLED_BOM} and {@link AIiArtifactDependencyScope#getLevel()} is not {@link AInArtifactBuiltinDependencyScopeBindingTemplate#IMPORT}, then:
  * 		    <ul>
  * 		      <li>Prefer WARN if you want to allow exceptional cases.</li>
  * 		      <li>Prefer ERROR if {@code UNCONTROLLED_BOM} is intended strictly as "importable POM only".</li>
@@ -130,7 +130,7 @@ import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencySco
  * 		  </li>
  *
  * 		  <li><b>S-02 IMPORT must not target UNCONTROLLED_CORE (ERROR)</b><br/>
- * 		    If {@link AIiArtifactDependencyScope#getLevel()} is {@link AInArtifactBuiltinDependencyScopeRuleTemplate#IMPORT}, then {@code target.kind != UNCONTROLLED_CORE}.</li>
+ * 		    If {@link AIiArtifactDependencyScope#getLevel()} is {@link AInArtifactBuiltinDependencyScopeBindingTemplate#IMPORT}, then {@code target.kind != UNCONTROLLED_CORE}.</li>
  *
  * 		  <li><b>S-03 Direct dependency on POLICY is unusual (WARN)</b><br/>
  * 		    If context is DIRECT and {@code target.kind == POLICY}, emit WARN:
@@ -160,7 +160,7 @@ import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencySco
  *
  * 		<ul>
  * 		  <li><b>U-01 UNDEFINED is managed-only (ERROR)</b><br/>
- * 		    If {@link AIiArtifactDependencyScope#getLevel()} is {@link AInArtifactBuiltinDependencyScopeRuleTemplate#UNDEFINED}, dependency must be declared only in MANAGED context.
+ * 		    If {@link AIiArtifactDependencyScope#getLevel()} is {@link AInArtifactBuiltinDependencyScopeBindingTemplate#UNDEFINED}, dependency must be declared only in MANAGED context.
  * 		    Direct dependencies must always be explicit (non-undefined) for valid POM generation.</li>
  *
  * 		  <li><b>U-02 UNDEFINED must be resolved before materialization (ERROR)</b><br/>
@@ -188,7 +188,7 @@ import eu.algites.tool.devops.build.model.common.AInArtifactBuiltinDependencySco
  * 		<h2>Note on "allowedArtifactKinds": Owner vs Target</h2>
  *
  * 		<p>
- * 		It is strongly recommended to interpret {@link AInArtifactBuiltinDependencyScopeRuleTemplate#getAllowedForUsageInDependencyWithArtifactKinds()} on scope levels as constraints on the
+ * 		It is strongly recommended to interpret {@link AInArtifactBuiltinDependencyScopeBindingTemplate#getAllowedForUsageInDependencyWithArtifactKinds()} on scope levels as constraints on the
  * 		<b>owner kind</b> ("where this scope can be used"), not on the target kind. Target-kind constraints should be
  * 		expressed by dedicated rules (e.g., IMPORT importable target kinds, POM-required kinds, etc.).
  * 		This keeps the validator logic readable and avoids mixing unrelated semantics.

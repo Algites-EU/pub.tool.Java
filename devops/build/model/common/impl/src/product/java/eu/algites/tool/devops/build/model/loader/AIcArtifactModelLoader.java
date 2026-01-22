@@ -19,7 +19,7 @@ import eu.algites.tool.devops.build.model.artifact.AIcArtifactOutput;
 import eu.algites.tool.devops.build.model.artifact.AIcUndefinedArtifact;
 import eu.algites.tool.devops.build.model.artifact.AIiAbstractArtifact;
 import eu.algites.tool.devops.build.model.artifact.AIiControlledArtifact;
-import eu.algites.tool.devops.build.model.artifact.AIiArtifactDependency;
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependency;
 import eu.algites.tool.devops.build.model.common.dto.AIcArtifactContainerDefDTO;
 import eu.algites.tool.devops.build.model.common.AIcContainedArtifactLocalKey;
 import eu.algites.tool.devops.build.model.common.AIiAbstractArtifactContainer;

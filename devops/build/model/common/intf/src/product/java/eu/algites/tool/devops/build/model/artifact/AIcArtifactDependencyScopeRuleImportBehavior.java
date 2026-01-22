@@ -1,5 +1,9 @@
 package eu.algites.tool.devops.build.model.artifact;
 
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependencyScopeRuleExportBehavior;
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependencyScopeRuleImportBehavior;
+import eu.algites.tool.devops.build.model.dependency.AIiArtifactDependencyScopeRuleRuntimeCompileBehavior;
+
 /**
  * Implementation of {@link AIiArtifactDependencyScopeRuleImportBehavior}.
  *

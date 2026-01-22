@@ -1,4 +1,8 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
+
+import eu.algites.tool.devops.build.model.artifact.AIiAbstractArtifact;
+import eu.algites.tool.devops.build.model.artifact.AIiArtifactCoordinate;
+import eu.algites.tool.devops.build.model.artifact.AIiArtifactOutput;
 
 import java.util.List;
 
@@ -20,7 +24,7 @@ import java.util.List;
  * @date 07.01.26 15:53
  */
 public interface AIiArtifactDependency<A extends AIiAbstractArtifact, ALINK extends AIiArtifactOutput<A>> extends
-		AIiArtifactDependencyScopeRulesContainer {
+		AIiArtifactDependencyScopeBindingsContainer {
 
 	/**
 	 * Gets the linked artifact output. The type of artifact linked to the output

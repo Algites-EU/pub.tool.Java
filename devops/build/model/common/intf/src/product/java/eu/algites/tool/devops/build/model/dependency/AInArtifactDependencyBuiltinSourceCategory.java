@@ -1,4 +1,4 @@
-package eu.algites.tool.devops.build.model.artifact;
+package eu.algites.tool.devops.build.model.dependency;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * <p>
- * Title: {@link AInDependencyBuiltinSourceSet}
+ * Title: {@link AInArtifactDependencyBuiltinSourceCategory}
  * </p>
  * <p>
  * Description: Contains the definition of the source sets
@@ -23,42 +23,43 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author linhart1
  * @date 11.01.26 7:47
  */
-public enum AInDependencyBuiltinSourceSet {
-	MAIN_ONLY("builtin::mainOnly", true, false),
-	TEST_ONLY("builtin::testOnly", false, true),
-	MAIN_AND_TEST("builtin::mainAndTest", true, true);
+public enum AInArtifactDependencyBuiltinSourceCategory implements AIiArtifactDependencyScopeSourceCategory {
+	MAIN("builtin::main", true, false),
+	TEST("builtin::test", false, true),
+	;
 
 	private final String code;
-	private final boolean mainIncluded;
+	private final boolean main;
 
-	private final boolean testIncluded;
+	private final boolean test;
 
-	AInDependencyBuiltinSourceSet(final String aCode, final boolean aMainIncluded, boolean aTestIncluded) {
+	AInArtifactDependencyBuiltinSourceCategory(final String aCode, final boolean aMain, boolean aTest) {
 		code = aCode;
-		mainIncluded = aMainIncluded;
-		testIncluded = aTestIncluded;
+		main = aMain;
+		test = aTest;
 	}
 
 	/**
 	 * @return the code
 	 */
 	@JsonValue
-	public String getCode() {
+	@Override
+	public String code() {
 		return code;
 	}
 
 	/**
 	 * @return the mainIncluded
 	 */
-	public boolean isMainIncluded() {
-		return mainIncluded;
+	public boolean isMain() {
+		return main;
 	}
 
 	/**
 	 * @return the testIncluded
 	 */
-	public boolean isTestIncluded() {
-		return testIncluded;
+	public boolean isTest() {
+		return test;
 	}
 
 	/**
@@ -67,8 +68,8 @@ public enum AInDependencyBuiltinSourceSet {
 	 * @throws IllegalArgumentException if the code is not null but unknown
 	 */
 	@JsonCreator
-	public static AInDependencyBuiltinSourceSet getByCodeOrThrow(final String aCode) throws IllegalArgumentException {
-		final AInDependencyBuiltinSourceSet value = findByCode(aCode);
+	public static AInArtifactDependencyBuiltinSourceCategory getByCodeOrThrow(final String aCode) throws IllegalArgumentException {
+		final AInArtifactDependencyBuiltinSourceCategory value = findByCode(aCode);
 		if (value != null)
 			return value;
 		throw new IllegalArgumentException("Unknown sourceSet: " + aCode);
@@ -78,8 +79,8 @@ public enum AInDependencyBuiltinSourceSet {
 	 * @param aCode code to be searched for
 	 * @return the enum value or null if not found
 	 */
-	public static @Nullable AInDependencyBuiltinSourceSet findByCode(final String aCode) {
-		for (AInDependencyBuiltinSourceSet locValue : values()) {
+	public static @Nullable AInArtifactDependencyBuiltinSourceCategory findByCode(final String aCode) {
+		for (AInArtifactDependencyBuiltinSourceCategory locValue : values()) {
 			if (locValue.getCode().equalsIgnoreCase(aCode)) {
 				return locValue;
 			}

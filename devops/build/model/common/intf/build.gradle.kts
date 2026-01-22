@@ -17,7 +17,7 @@ java {
     }
 }
 
-group = "eu.algites.tool.devops"
+group = "eu.algites.pltf.knitstro"
 
 val ALGITES_PUB_LIB_JAVA_VERSION = "0.0.1-SNAPSHOT"
 val TESTNG_VERSION = "7.11.0"
@@ -31,6 +31,5 @@ dependencies {
     implementation("tools.jackson.core:jackson-databind:" + JACKSON_VERSION)
     implementation("tools.jackson.dataformat:jackson-dataformat-yaml:" + JACKSON_VERSION)
     api("eu.algites.lib.common:pub.lib.Java_util.common:" + ALGITES_PUB_LIB_JAVA_VERSION)
-    api("eu.algites.tool.devops:pub.tool.Java_devops.build.model.common:" + ALGITES_PUB_TOOL_JAVA_VERSION)
 
 }
