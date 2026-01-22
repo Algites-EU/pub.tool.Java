@@ -20,18 +20,18 @@ publishing {
         create<MavenPublication>("pluginMaven") {
             from(components["java"])
             groupId = "eu.algites.tool.build"
-            artifactId = "pub.tool.Java_build.basic-gradle"
+            artifactId = "pub.pltf.Knitstro_build.basic-gradle"
             version = project.version.toString()
         }
     }
     repositories {
         maven {
-            name = "pub.tool.Java"
-            url = uri("https://maven.pkg.github.com/Algites-EU/pub.tool.Java")
+            name = "pub.pltf.Knitstro"
+            url = uri("https://maven.pkg.github.com/Algites-EU/pub.pltf.Knitstro")
             credentials {
-                username = (findProperty("Algites.github.pub.tool.Java.user") as String?)
+                username = (findProperty("Algites.github.pub.pltf.Knitstro.user") as String?)
                     ?: System.getenv("ALGITES_GITHUB_PUB_TOOL_JAVA_USER")
-                password = (findProperty("Algites.github.pub.tool.Java.token") as String?)
+                password = (findProperty("Algites.github.pub.pltf.Knitstro.token") as String?)
                     ?: System.getenv("ALGITES_GITHUB_PUB_TOOL_JAVA_TOKEN")
             }
         }
@@ -82,7 +82,7 @@ publishing {
     publications {
         create<MavenPublication>("pluginMaven") {
             from(components["java"])
-            artifactId = "pub.tool.Java_build.basic-gradle"
+            artifactId = "pub.pltf.Knitstro_build.basic-gradle"
         }
     }
 }

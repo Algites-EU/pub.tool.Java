@@ -30,5 +30,5 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api:" + JAKARTA_ANNOTATION_VERSION)
     implementation("tools.jackson.core:jackson-databind:" + JACKSON_VERSION)
     implementation("tools.jackson.dataformat:jackson-dataformat-yaml:" + JACKSON_VERSION)
-    api("eu.algites.tool.devops:pub.pltf.Knitstro_devops.build.model.common.intf:" + ALGITES_PUB_TOOL_JAVA_VERSION)
+    api("eu.algites.pltf.knitstro:pub.pltf.Knitstro_devops.build.model.common.intf:" + ALGITES_PUB_TOOL_JAVA_VERSION)
 }

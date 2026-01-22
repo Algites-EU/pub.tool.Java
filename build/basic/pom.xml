@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>eu.algites.tool.build</groupId>
-	<artifactId>pub.tool.Java_build.basic-maven</artifactId>
+	<artifactId>pub.pltf.Knitstro_build.basic-maven</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -91,11 +91,11 @@
 
 	<distributionManagement>
 		<repository>
-			<id>Algites.github.pub.tool.Java</id>
-			<url>https://maven.pkg.github.com/Algites-EU/pub.tool.Java</url>
+			<id>Algites.github.pub.pltf.Knitstro</id>
+			<url>https://maven.pkg.github.com/Algites-EU/pub.pltf.Knitstro</url>
 		</repository>
 		<snapshotRepository>
-			<id>Algites.github.pub.tool.Java</id>
-			<url>https://maven.pkg.github.com/Algites-EU/pub.tool.Java</url>
+			<id>Algites.github.pub.pltf.Knitstro</id>
+			<url>https://maven.pkg.github.com/Algites-EU/pub.pltf.Knitstro</url>
 		</snapshotRepository>
 	</distributionManagement></project>

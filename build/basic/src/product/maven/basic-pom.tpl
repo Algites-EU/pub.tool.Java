@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eu.algites.tool.build</groupId>
-  <artifactId>pub.tool.Java_build.basic-maven</artifactId>
+  <artifactId>pub.pltf.Knitstro_build.basic-maven</artifactId>
   <version>@project.build.tool.version@</version>
   <packaging>pom</packaging>
 

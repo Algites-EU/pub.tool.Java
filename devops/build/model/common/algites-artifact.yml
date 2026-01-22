@@ -2,7 +2,7 @@
 
 artifact:
   groupId: eu.algites.tool.devops
-  artifactId: pub.tool.Java_devops.build.model.common
+  artifactId: pub.pltf.Knitstro_devops.build.model.common
 
   parent:
     groupId: eu.algites.lib

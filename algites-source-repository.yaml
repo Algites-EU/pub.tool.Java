@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/refs/heads/main/schemas/json/devops/build/1.0.0/source-repository.schema.json
 
 sourceRepository:
-  repositoryId: pub.tool.Java
+  repositoryId: pub.pltf.Knitstro
   name: Algites public Java Tools srcrepo
   description: Public Java tools for Algites
   containedArtifactRelativePaths:

@@ -1,4 +1,4 @@
-# pub.tool.Java
+# pub.pltf.Knitstro
 
 **Algites Java Tool Governance Stack**
 
@@ -85,12 +85,12 @@ Example for the `basic` level:
 
 - Maven parent:
   ```
-  eu.algites.tool.build:pub.tool.Java_build.basic-maven:<version>:pom
+  eu.algites.tool.build:pub.pltf.Knitstro_build.basic-maven:<version>:pom
   ```
 
 - Gradle plugin:
   ```
-  eu.algites.tool.build:pub.tool.Java_build.basic-gradle:<version>:jar
+  eu.algites.tool.build:pub.pltf.Knitstro_build.basic-gradle:<version>:jar
   ```
 
 Gradle plugin ID:
