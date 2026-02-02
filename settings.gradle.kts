@@ -19,8 +19,18 @@ pluginManagement {
     }
 }
 
+val locIsCi: Boolean =
+    providers.gradleProperty("CI")
+        .orElse(providers.environmentVariable("CI"))
+        .map { it.equals("true", ignoreCase = true) }
+        .orElse(false)
+        .get()
+
 dependencyResolutionManagement {
     repositories {
+        if (!locIsCi) {
+            mavenLocal()
+        }
         mavenCentral()
         maven {
             name = "algites-public-releases"
@@ -39,6 +49,9 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "pub.pltf.Knitstro"
-include(":devops:build:model:common:intf")
-include(":devops:build:model:common:impl")
+include(":structure:version:intf")
+include(":structure:version:impl")
+include(":structure:artifacts:model:intf")
+include(":structure:artifacts:model:impl")

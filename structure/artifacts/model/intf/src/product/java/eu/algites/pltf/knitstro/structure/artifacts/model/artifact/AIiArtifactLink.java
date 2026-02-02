@@ -1,0 +1,30 @@
+package eu.algites.pltf.knitstro.structure.artifacts.model.artifact;
+
+/**
+ * <p>
+ * Title: {@link AIiArtifactLink}
+ * </p>
+ * <p>
+ * Description: Gets the abstraction of the link of the artifact, which is intended to be used as a target for dependency-like relations
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2026 Artur Linhart, Algites
+ * </p>
+ * <p>
+ * Company: Algites
+ * </p>
+ *
+ * @author linhart1
+ * @date 07.01.26 15:53
+ */
+public interface AIiArtifactLink<A extends AIiAbstractArtifact> {
+
+	/**
+	 * Gets the runtime reference to the linked artifact
+	 *
+	 * @return the runtime reference to linked artifact
+	 */
+	AIiArtifactRuntimeReference<A> getLinkedArtifact();
+
+
+}

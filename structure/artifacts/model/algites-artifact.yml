@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/refs/heads/main/schemas/json/devops/build/1.0.0/artifact.schema.json
+
+artifact:
+  groupId: eu.algites.pltf.knitstro
+  artifactId: pub.pltf.Knitstro_structure.artifacts.model
+
+  parent:
+    groupId: eu.algites.lib
+    artifactId: util-common
+    outputType: "builtin:::pom"
+
+  name: Common build structure model definition artifact
+  description: |
+    Contains the structures necessary for handling of repositories and artifacts 
+    in them in Algites style
+  containedArtifactRelativePaths:
+    - intf
+    - impl
+
+
+  properties:
+    includedTemplates:
+      - custom:my.domain:myVersionsTemplate
+
+    defs:
+      - devops.prop: test123
+      - gversion: 1.2.3
+
+  outputs:
+    - outputType: builtin:::pom
+
+
+
+projectPropertiesTemplates:
+  - templateUid: custom:my.domain:myVersionsTemplate
+    includedTemplates:
+      - custom:my.domain:my-imported-template
+    defs:
+      - my.version: "1.2.3"
+      - log4j.version: "2.17.2"
+      - my.structured.version:
+          item1: 1213
+          item2: 987
+
+
+dependencyBindingTemplates:
+  - templateUid: custom:my.domain:accessMainRuntimeInTestScope
+    scopeBindings:
+      - purposes:
+          - builtin::compilation
+        sourceSets:
+          - builtin::main
+          - builtin::test
+        export: builtin::as-dependency
+      - purposes:
+          - builtin::compilation
+        sourceSet: TEST_ONLY
+        lock: builtin::soft
+        weight: 10
+
+dependenciesTemplates:
+  - templateUid: custom:my.domain:log4jStandard
+    dependencies:
+      - artifact:
+          groupId: log4j
+          artifactId: log4jimpl
+          outputType: builtin:::jar
+          version: "${log4j.version}"
+
+        scopeBindings:
+          - purposes: builtin::runtime
+            export: builtin::as-dependency
+            sourceSets:
+              - builtin::main
+            weight: 0
+
+          - purposes: builtin::compilation
+            export: builtin::as-constraint
+            sourceSets:
+              - builtin::test
+            weight: 0
+

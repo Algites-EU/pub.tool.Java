@@ -1,0 +1,149 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Algites-EU/pub.gov.Algites/refs/heads/main/schemas/json/devops/build/1.0.0/artifact.schema.json
+
+artifact:
+  groupId: eu.algites.pltf.knitstro
+  artifactId: pub.pltf.Knitstro_structure.artifacts.model.intf
+
+  parent:
+    groupId: eu.algites.lib
+    artifactId: util-common
+    outputType: "builtin::pbbom:pom"
+
+  name: Common build structure model definition artifact
+  description: |
+    Contains the structures necessary for handling of repositories and artifacts 
+    in them in Algites style
+
+
+  properties:
+    includedTemplates:
+      - custom:my.domain:myVersionsTemplate
+
+    defs:
+      - devops.prop: test123
+      - gversion: 1.2.3
+
+  outputs:
+    - outputType: builtin:::jar
+    - outputType: builtin:::pom
+    - outputType: builtin::sources:jar
+    - outputType: builtin::tests:jar
+    - outputType: builtin::test-sources:jar
+
+
+
+  dependencies:
+    # ------------------------------------------------------------
+    # CONTROLLED dependencies (no version here; resolved via VersionContext)
+    # ------------------------------------------------------------
+    - template: custom:my.domain:log4jStandard
+
+    - artifact:
+        groupId: eu.algites.lib
+        artifactId: util-common
+
+      scopeBindings:
+        # 1) Main compile, exported to consumers as compile => Gradle 'api'
+        - templates: builtin::gradleApi
+          weight: 0
+
+        - templates: builtin::gradleTestImplementation
+          purposeGroup: builtin::compilation-and-runtime
+          purposesInheritance: builtin::union
+          sourceSetGroup: builtin::test-only
+          sourceSetsInheritance: builtin::replace
+          outputType: builtin::tests:jar
+          export: builtin::as-dependency
+          localUsage: builtin::with-transitives
+          exclusions:
+            - groupId: other.goup
+              artifactId: some.artifact
+            - groupId: other.goup
+              artifactId: some.other.artifact
+          exclusionsInheritance: builtin::union
+          lock: builtin::soft
+          weight: -10
+
+
+    # ------------------------------------------------------------
+    # UNCONTROLLED dependency (version specified directly)
+    # Typical: external libs.
+    # ------------------------------------------------------------
+    - artifact:
+        groupId: org.postgresql
+        artifactId: postgresql
+        version: "42.7.4"
+
+      scopeBindings:
+        # Main runtime only (driver should not be on compile API)
+        - templates: { builtin::gradleRuntimeOnly }
+          outputType: builtin:::jar
+
+          # uncontrolled version rule (simple MVP form)
+          version: "42.7.4"
+          weight: 0
+
+        # But tests may compile against it (example: integration tests)
+        - purposes:
+            builtin::compilation
+            builtin::runtime
+          version:
+            range: "[42.7.5, *)"
+            preferred: "42.7.5"
+          sourceSetGroup: buitin::test-only
+          weight: 10
+
+
+    # ------------------------------------------------------------
+    # STEERING ONLY (exportAs: manage)
+    # No classpath purpose, just export constraints/intents to consumers.
+    # (E.g. PIBOM/PVBOM use-cases.)
+    # ------------------------------------------------------------
+    - artifact:
+        groupId: com.fasterxml.jackson.core
+        artifactId: jackson-databind
+        outputType: builtin:::jar
+
+        version:
+          range: "[2.15.0, 3.0.0)"
+          preferred: "2.17.2"
+
+      scopeBindings:
+        # Export as "manage" (constraints/steering) for main consumers
+        - purposes: builtin::compilation
+          sourceSetGroup: buitin::test-only
+          weight: 0
+
+        # Optional: tests in this module still want it on classpath
+        # (shows coexistence of steering + local test purpose)
+        - templates: builtin::gradleTestImplementation
+          weight: -20
+
+
+    # ------------------------------------------------------------
+    # Another example: explicit-only rules, no templates
+    # ------------------------------------------------------------
+    - artifact:
+        groupId: org.slf4j
+        artifactId: slf4j-api
+        outputType: builtin:::jar
+        version: "2.0.16"
+
+      scopeBindings:
+        - purposes: builtin::compilation
+          sourceSet: MAIN_ONLY
+          behavior:
+            importUse:
+              compile: true
+            exportUse:
+              compile: true
+              manage: true
+          weight: 0
+
+        - purposes: builtin::compilation
+          sourceSet: TEST_ONLY
+          behavior:
+            importUse:
+              compile: true
+          weight: 0
+
