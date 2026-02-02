@@ -7,7 +7,7 @@ plugins {
 // --- Dependency resolution repos (read) ---
 allprojects {
     layout.buildDirectory.set(
-        rootProject.layout.projectDirectory.dir("run/bld/gradle/${project.name}")
+        rootProject.layout.projectDirectory.dir("run/bld/gradle/${project.path.removePrefix(":").replace(':', '_')}")
     )
 }
 
