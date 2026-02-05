@@ -1,6 +1,6 @@
 package eu.algites.pltf.knitstro.structure.artifacts.model.artifact.dto;
 
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AIiArtifactOutputTypeData;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIiArtifactOutputTypeData;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

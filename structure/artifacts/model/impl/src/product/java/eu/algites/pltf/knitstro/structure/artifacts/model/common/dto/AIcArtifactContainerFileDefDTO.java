@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Common container-level configuration shared by artifact and source-srcrepo YAML files.
  *
- * <p>This DTO models the "container" layer: version context and renderPattern sets that are
+ * <p>This DTO models the "container" layer: version context and template sets that are
  * inherited by contained artifacts in the same container.</p>
  * @author linhart1
  */

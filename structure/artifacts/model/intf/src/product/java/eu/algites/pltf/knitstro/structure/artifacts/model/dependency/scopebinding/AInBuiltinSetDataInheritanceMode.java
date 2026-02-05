@@ -6,9 +6,9 @@ import static eu.algites.lib.common.enums.uiddata.AIsUidEnumDataUtils.parseUid;
 import static eu.algites.pltf.knitstro.structure.artifacts.model.utils.AInComponentType.DEPENDENCY_SCOPE_BINDING_SET_INHERITANCE_MODE;
 import static eu.algites.pltf.knitstro.structure.artifacts.model.utils.AInComponentType.DEPENDENCY_PURPOSE;
 
+import eu.algites.lib.common.enums.uiddata.AIcUidEnumDataRegistry;
 import eu.algites.lib.common.enums.uiddata.AInUidEnumDataOrigin;
 import eu.algites.lib.common.enums.uiddata.AIsUidEnumDataUtils;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.AIiArtifactDependencyScopeBinding;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +20,10 @@ import java.util.stream.Stream;
  * </p>
  * <p>
  * Description: Defines the modes of the inheritance of the set properties
- *    (like {@link AIiArtifactDependencyScopeBinding#getSourceSets()},
- *    {@link AIiArtifactDependencyScopeBinding#getUsages()}
+ *    (like {@link AIiScopeBinding#getSourceSets()},
+ *    {@link AIiScopeBinding#getUsages()}
  *    and
- *    {@link AIiArtifactDependencyScopeBinding#getExclusions()}
+ *    {@link AIiScopeBinding#getExclusions()}
  * </p>
  * <p>
  * Copyright: Copyright (c) 2026 Artur Linhart, Algites
@@ -49,6 +49,7 @@ public enum AInBuiltinSetDataInheritanceMode implements AIiSetDataInheritanceMod
 		uid = AIsUidEnumDataUtils.createBuiltinUid(
 				List.of(code),
 				AIiSetDataInheritanceModeDataUidRecord.RECORD_SPECIFIC_PARTS_METADATA);
+		AIcUidEnumDataRegistry.getInstance().registerData(true, true, true, this);
 	}
 
 	@Override

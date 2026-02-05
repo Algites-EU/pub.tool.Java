@@ -1,6 +1,6 @@
 package eu.algites.pltf.knitstro.structure.artifacts.model.common.dto;
 
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AIiArtifactOutputTypeData;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIiArtifactOutputTypeData;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.AIiArtifactDependencyScopeBindingExportModeData;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.AIiArtifactDependencyScopeBindingLocalUsageModeData;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.AIiArtifactDependencyScopeBindingLockKindData;

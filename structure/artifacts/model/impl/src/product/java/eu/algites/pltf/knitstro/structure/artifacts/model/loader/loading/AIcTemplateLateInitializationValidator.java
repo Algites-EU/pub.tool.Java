@@ -51,8 +51,8 @@ class AIcTemplateLateInitializationValidator<T extends AIiAbstractTemplate<T>>
 		}
 
 		/*
-		 * Validate the renderPattern referenced by the currently inserted renderPattern does not
-		 * reference the currently inserted renderPattern back (directly or transitively),
+		 * Validate the template referenced by the currently inserted template does not
+		 * reference the currently inserted template back (directly or transitively),
 		 * otherwise it would be a cyclic reference.
 		 */
 		Map<String, ?> locIncludedTemplates = aNewValue.getIncludedTemplates();
@@ -67,14 +67,14 @@ class AIcTemplateLateInitializationValidator<T extends AIiAbstractTemplate<T>>
 
 			if (Objects.equals(locTemplateUid, aKey)) {
 				throw new AIxLateInitializationMapException(
-						"Cyclic renderPattern reference detected: renderPattern '" + aKey
+						"Cyclic template reference detected: template '" + aKey
 								+ "' includes itself directly ('" + locTemplateUid + "')."
 				);
 			}
 
 			/*
 			 * We only validate against templates already initialized in the map.
-			 * If the included renderPattern is not initialized yet, we cannot prove or disprove a cycle here.
+			 * If the included template is not initialized yet, we cannot prove or disprove a cycle here.
 			 */
 			if (!aMap.isInitialized(locTemplateUid)) {
 				continue;
@@ -96,7 +96,7 @@ class AIcTemplateLateInitializationValidator<T extends AIiAbstractTemplate<T>>
 			if (locCycleFound) {
 				String locRenderedPath = renderCyclePath(aKey, locPath);
 				throw new AIxLateInitializationMapException(
-						"Cyclic renderPattern reference detected while inserting renderPattern '" + aKey
+						"Cyclic template reference detected while inserting template '" + aKey
 								+ "'. Cycle: " + locRenderedPath
 				);
 			}

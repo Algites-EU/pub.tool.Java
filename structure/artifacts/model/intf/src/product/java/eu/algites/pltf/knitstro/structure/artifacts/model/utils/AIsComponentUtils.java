@@ -8,13 +8,16 @@ import eu.algites.lib.common.enums.uiddata.AIiUidEnumDataType;
 import eu.algites.lib.common.enums.uiddata.AIiUidEnumDataRecord;
 import eu.algites.lib.common.enums.uiddata.AInUidEnumDataOrigin;
 import eu.algites.lib.common.exception.AIxDevelopmentErrorException;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AIiArtifactOutputTypeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIiArtifactTemplateDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AInArtifactBuiltinDependencyScopeBindingTemplate;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiPurposeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinPurpose;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrPurposeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIiArtifactOutputTypeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIrArtifactOutputTypeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIiTemplateDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIrTemplateDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinDependencyScopeBindingTemplate;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIiPurposeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AInBuiltinPurpose;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIrPurposeDataUidRecord;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
@@ -70,9 +73,9 @@ public class AIsComponentUtils {
 	 * @param aUidParts the UID parts
 	 * @return the output type record - in the case of builtin
 	 */
-	public static AIiArtifactTemplateDataUidRecord defineDependencyScopeBindingTemplateRecord(AInComponentType aComponentType, String aUid, List<String> aUidParts) {
+	public static AIiTemplateDataUidRecord defineDependencyScopeBindingTemplateRecord(AInComponentType aComponentType, String aUid, List<String> aUidParts) {
 		if (aComponentType == DEPENDENCY_SCOPE_BINDING_TEMPLATE)
-			return (AIiArtifactTemplateDataUidRecord) internalDefineTemplateIdRecord(DEPENDENCY_SCOPE_BINDING_TEMPLATE, aUid, aUidParts);
+			return (AIiTemplateDataUidRecord) internalDefineTemplateIdRecord(DEPENDENCY_SCOPE_BINDING_TEMPLATE, aUid, aUidParts);
 		throw new AIxDevelopmentErrorException("Builtin for component type is invalid for this method. Component type: " + aComponentType + ", expected: " + DEPENDENCY_SCOPE_BINDING_TEMPLATE);
 	}
 
@@ -106,8 +109,8 @@ public class AIsComponentUtils {
 		AInUidEnumDataOrigin locOrigin = AInUidEnumDataOrigin.getByCodeOrThrow(aUidParts.get(0));
 		if (locOrigin == AInUidEnumDataOrigin.BUILTIN)
 			switch (locComponentType) {
-			case OUTPUT_TYPE: return (R) AInArtifactBuiltinDependencyScopeBindingTemplate.getByUidOrThrow(aUid);
-			case DEPENDENCY_SCOPE_BINDING_TEMPLATE: return (R) AInArtifactBuiltinDependencyScopeBindingTemplate.getByUidOrThrow(aUid);
+			case OUTPUT_TYPE: return (R) AInBuiltinDependencyScopeBindingTemplate.getByUidOrThrow(aUid);
+			case DEPENDENCY_SCOPE_BINDING_TEMPLATE: return (R) AInBuiltinDependencyScopeBindingTemplate.getByUidOrThrow(aUid);
 			case DEPENDENCY_PURPOSE: return (R) AInBuiltinPurpose.getByUidOrThrow(aUid);
 			default:
 				throw new AIxDevelopmentErrorException("Builtin for component type cannot be found. Component type: " + locComponentType);
@@ -119,7 +122,7 @@ public class AIsComponentUtils {
 						AInUidEnumDataOrigin.getByCodeOrThrow(aUidParts.get(0)),
 						aUidParts.get(1), aUidParts.get(2), aUidParts.get(3));
 			case DEPENDENCY_SCOPE_BINDING_TEMPLATE:
-				return (R) new AIrArtifactTemplateDataUidRecord(aUid,
+				return (R) new AIrTemplateDataUidRecord(aUid,
 						AInUidEnumDataOrigin.getByCodeOrThrow(aUidParts.get(0)),
 						aUidParts.get(1), aUidParts.get(2));
 			case DEPENDENCY_PURPOSE:
@@ -136,6 +139,57 @@ public class AIsComponentUtils {
 	public static AIiPurposeDataUidRecord defineDependencyPurposeRecord(AIiUidEnumDataType<AIiPurposeDataUidRecord, AInUidEnumDataOrigin> aAIiArtifactDependencyPurposeUidPartsRecordAInUidEnumDataOriginAIiUidEnumDataType, String aS, List<String> aStrings) {
 	}
 
+	/**
+	 * <p>
+	 * Creates an instance of a nested class in {@link AInComponentType} based on the passed marker interface type.
+	 * </p>
+	 *
+	 * @param aMarkerInterfaceType marker interface class (e.g. {@code AIiFirst.class})
+	 * @return instance of corresponding nested class (e.g. {@code AInComponentType.AIcFirst})
+	 * @param <T> type of the returned instance
+	 */
+	public static <T extends AIiUidEnumDataType<?, AInUidEnumDataOrigin>> T newNestedInstanceFromMarkerInterfaceOrThrow(Class<? extends AIiUidEnumDataType<?, AInUidEnumDataOrigin>> aMarkerInterfaceType) {
+		String locInterfaceSimpleName = aMarkerInterfaceType.getSimpleName();
+		if (locInterfaceSimpleName.length() < 4) {
+			throw new IllegalArgumentException("Marker interface name is too short: " + aMarkerInterfaceType.getName());
+		}
+
+		if (!locInterfaceSimpleName.startsWith("AIi")) {
+			throw new IllegalArgumentException(
+					"Marker interface name must start with 'AIi': " + aMarkerInterfaceType.getName()
+			);
+		}
+
+		String locSuffix = locInterfaceSimpleName.substring(3);
+		if (locSuffix.isBlank()) {
+			throw new IllegalArgumentException("Marker interface name has no suffix after 'AIi': " + aMarkerInterfaceType.getName());
+		}
+
+		String locNestedSimpleName = "AIc" + locSuffix;
+		String locNestedFqn = AInComponentType.class.getName() + "$" + locNestedSimpleName;
+
+		Class<?> locNestedClass = loadClassOrThrow(locNestedFqn);
+		return instantiateNoArgsOrThrow(locNestedClass);
+	}
+
+	private static Class<?> loadClassOrThrow(String aClassName) {
+		try {
+			return Class.forName(aClassName);
+		} catch (ClassNotFoundException locException) {
+			throw new IllegalStateException("Nested class not found: " + aClassName, locException);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static <T extends AIiUidEnumDataType<?, AInUidEnumDataOrigin>> T instantiateNoArgsOrThrow(Class<?> aClass) {
+		try {
+			Constructor<?> locConstructor = aClass.getDeclaredConstructor();
+			locConstructor.setAccessible(true);
+			return (T) locConstructor.newInstance();
+		} catch (ReflectiveOperationException locException) {
+			throw new IllegalStateException("Cannot instantiate: " + aClass.getName(), locException);
+		}
+	}
 
 //	/**
 //	 * Record characterizing the component type uid part
@@ -194,12 +248,12 @@ public class AIsComponentUtils {
 //	 *
 //	 * <p>Example: {@usageCode builtin:::mavenCompile} or {@usageCode builtin::gradleApi}
 //	 *
-//	 * @param aTemplateId renderPattern id (must be non-empty)
+//	 * @param aTemplateId template id (must be non-empty)
 //	 * @return UID string
 //	 */
 //	public static String createBuiltinTemplateUid(String aTemplateId) {
-//		String locNormalizedTemplateId = normalizeRequiredSegment(aTemplateId, "renderPattern-id");
-//		validateSafeSegment(locNormalizedTemplateId, "renderPattern-id");
+//		String locNormalizedTemplateId = normalizeRequiredSegment(aTemplateId, "template-id");
+//		validateSafeSegment(locNormalizedTemplateId, "template-id");
 //		return join(BUILTIN, "", locNormalizedTemplateId);
 //	}
 //
@@ -214,10 +268,10 @@ public class AIsComponentUtils {
 //	 */
 //	public static String createCustomTemplateUid(String aNamespace, String aTemplateId) {
 //		String locNormalizedNamespace = normalizeRequiredSegment(aNamespace, "namespace");
-//		String locNormalizedTemplateId = normalizeRequiredSegment(aTemplateId, "renderPattern-id");
+//		String locNormalizedTemplateId = normalizeRequiredSegment(aTemplateId, "template-id");
 //
 //		validateSafeNamespace(locNormalizedNamespace);
-//		validateSafeSegment(locNormalizedTemplateId, "renderPattern-id");
+//		validateSafeSegment(locNormalizedTemplateId, "template-id");
 //
 //		return join(AInComponentOriginClass.CUSTOM, locNormalizedNamespace, locNormalizedTemplateId);
 //	}

@@ -4,46 +4,47 @@ import eu.algites.lib.common.enums.uiddata.AIiUidEnumDataRecord;
 import eu.algites.lib.common.enums.uiddata.AIiUidEnumDataType;
 import eu.algites.lib.common.enums.uiddata.AIiUidPartMetadata;
 import eu.algites.lib.common.enums.uiddata.AInUidEnumDataOrigin;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AIiArtifactOutputTypeDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AIiArtifactOutputTypeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AInArtifactBuiltinOutputType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIiArtifactTemplateDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIiArtifactTemplateDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AInArtifactBuiltinDependencyScopeBindingTemplate;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiPurposeDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiPurposeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiPurposeGroupDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiPurposeGroupDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiExportModeDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiExportModeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiLocalUsageModeDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiLocalUsageModeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiLockKindDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiLockKindDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIiArtifactOutputTypeDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIiArtifactOutputTypeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AInArtifactBuiltinOutputType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIrArtifactOutputTypeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIiTemplateDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIiTemplateDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.template.AIrTemplateDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinDependencyScopeBindingTemplate;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIiPurposeDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIiPurposeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIiPurposeGroupDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIiPurposeGroupDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.export.AIiExportModeDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.export.AIiExportModeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.localusage.AIiLocalUsageModeDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.localusage.AIiLocalUsageModeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.lock.AIiLockKindDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.lock.AIiLockKindDataUidRecord;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiSetDataInheritanceModeDataType;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiSetDataInheritanceModeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiSourceSetDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiSourceSetDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiSourceSetGroupDataType;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiSourceSetGroupDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinPurpose;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinPurposeGroup;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinExportMode;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinLocalUsageMode;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinLockKind;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AIiSourceSetDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AIiSourceSetDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AIiSourceSetGroupDataType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AIiSourceSetGroupDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AInBuiltinPurpose;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AInBuiltinPurposeGroup;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.export.AInBuiltinExportMode;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.localusage.AInBuiltinLocalUsageMode;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.lock.AInBuiltinLockKind;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinSetDataInheritanceMode;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinSourceSet;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AInBuiltinSourceSetGroup;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrPurposeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrPurposeGroupDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrExportModeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrLocalUsageModeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrLockKindDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AInBuiltinSourceSet;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AInBuiltinSourceSetGroup;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIrPurposeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.purpose.AIrPurposeGroupDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.export.AIrExportModeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.localusage.AIrLocalUsageModeDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.lock.AIrLockKindDataUidRecord;
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrSetDataInheritanceModeDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrSourceSetDataUidRecord;
-import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIrSourceSetGroupDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AIrSourceSetDataUidRecord;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.sourceset.AIrSourceSetGroupDataUidRecord;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -54,7 +55,7 @@ import java.util.function.Function;
  * Title: {@link AInComponentType}
  * </p>
  * <p>
- * Description: Definition of the type of the given data - output type or renderPattern.
+ * Description: Definition of the type of the given data - output type or template.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2026 Artur Linhart, Algites
@@ -78,13 +79,13 @@ public enum AInComponentType {
 			AInArtifactBuiltinOutputType::getByUidOrThrow, false),
 	DEPENDENCY_SCOPE_BINDING_TEMPLATE(
 			"DEPENDENCY_SCOPE_RULE_TEMPLATE",
-			AIiArtifactTemplateDataType.class,
-			AIrArtifactTemplateDataUidRecord.class,
-			AIrArtifactTemplateDataUidRecord.getUidRecordFactory(),
-			AIrArtifactTemplateDataUidRecord.RECORD_SPECIFIC_PARTS_METADATA,
-			AInArtifactBuiltinDependencyScopeBindingTemplate.class,
-			AInArtifactBuiltinDependencyScopeBindingTemplate::findByUid,
-			AInArtifactBuiltinDependencyScopeBindingTemplate::getByUidOrThrow, true),
+			AIiTemplateDataType.class,
+			AIrTemplateDataUidRecord.class,
+			AIrTemplateDataUidRecord.getUidRecordFactory(),
+			AIrTemplateDataUidRecord.RECORD_SPECIFIC_PARTS_METADATA,
+			AInBuiltinDependencyScopeBindingTemplate.class,
+			AInBuiltinDependencyScopeBindingTemplate::findByUid,
+			AInBuiltinDependencyScopeBindingTemplate::getByUidOrThrow, true),
 	DEPENDENCY_SOURCE_SET_GROUP(
 			"DEPENDENCY_SOURCE_SET_GROUP",
 			AIiSourceSetGroupDataType.class,
@@ -184,7 +185,7 @@ public enum AInComponentType {
 			final boolean aTemplateComponent) {
 		code = aCode;
 		dataTypeInterfaceType = aDataTypeInterfaceType;
-		dataType = newNestedInstanceFromMarkerInterfaceOrThrow(dataTypeInterfaceType);
+		dataType = AIsComponentUtils.newNestedInstanceFromMarkerInterfaceOrThrow(dataTypeInterfaceType);
 		builtinItemFinder = aBuiltinItemFinder;
 		builtinItemGetter = aBuiltinItemGetter;
 		builtinEnumClass = aBuiltinEnumClass;
@@ -276,58 +277,6 @@ public enum AInComponentType {
 		return dataType;
 	}
 
-	/**
-	 * <p>
-	 * Creates an instance of a nested class in {@link AInComponentType} based on the passed marker interface type.
-	 * </p>
-	 *
-	 * @param aMarkerInterfaceType marker interface class (e.g. {@code AIiFirst.class})
-	 * @return instance of corresponding nested class (e.g. {@code AInComponentType.AIcFirst})
-	 * @param <T> type of the returned instance
-	 */
-	public static <T extends AIiUidEnumDataType<?, AInUidEnumDataOrigin>> T newNestedInstanceFromMarkerInterfaceOrThrow(Class<? extends AIiUidEnumDataType<?, AInUidEnumDataOrigin>> aMarkerInterfaceType) {
-		String locInterfaceSimpleName = aMarkerInterfaceType.getSimpleName();
-		if (locInterfaceSimpleName.length() < 4) {
-			throw new IllegalArgumentException("Marker interface name is too short: " + aMarkerInterfaceType.getName());
-		}
-
-		if (!locInterfaceSimpleName.startsWith("AIi")) {
-			throw new IllegalArgumentException(
-					"Marker interface name must start with 'AIi': " + aMarkerInterfaceType.getName()
-			);
-		}
-
-		String locSuffix = locInterfaceSimpleName.substring(3);
-		if (locSuffix.isBlank()) {
-			throw new IllegalArgumentException("Marker interface name has no suffix after 'AIi': " + aMarkerInterfaceType.getName());
-		}
-
-		String locNestedSimpleName = "AIc" + locSuffix;
-		String locNestedFqn = AInComponentType.class.getName() + "$" + locNestedSimpleName;
-
-		Class<?> locNestedClass = loadClassOrThrow(locNestedFqn);
-		return instantiateNoArgsOrThrow(locNestedClass);
-	}
-
-	private static Class<?> loadClassOrThrow(String aClassName) {
-		try {
-			return Class.forName(aClassName);
-		} catch (ClassNotFoundException locException) {
-			throw new IllegalStateException("Nested class not found: " + aClassName, locException);
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private static <T extends AIiUidEnumDataType<?, AInUidEnumDataOrigin>> T instantiateNoArgsOrThrow(Class<?> aClass) {
-		try {
-			Constructor<?> locConstructor = aClass.getDeclaredConstructor();
-			locConstructor.setAccessible(true);
-			return (T) locConstructor.newInstance();
-		} catch (ReflectiveOperationException locException) {
-			throw new IllegalStateException("Cannot instantiate: " + aClass.getName(), locException);
-		}
-	}
-
 	@SuppressWarnings("all")
 	private static class AIcArtifactOutputTypeDataType
 			extends AIcComponentDataType<AIiArtifactOutputTypeDataUidRecord>
@@ -339,11 +288,11 @@ public enum AInComponentType {
 	}
 
 	@SuppressWarnings("all")
-	private static class AIcArtifactTemplateDataType
-			extends AIcComponentDataType<AIiArtifactTemplateDataUidRecord>
-			implements AIiArtifactTemplateDataType {
+	private static class AIcTemplateDataType
+			extends AIcComponentDataType<AIiTemplateDataUidRecord>
+			implements AIiTemplateDataType {
 
-		private AIcArtifactTemplateDataType() {
+		private AIcTemplateDataType() {
 			super(DEPENDENCY_SCOPE_BINDING_TEMPLATE);
 		}
 	}

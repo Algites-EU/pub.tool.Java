@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
  * Description: <br/>
  * Tests for {@code AIcTemplateLateInitializationValidator}.
  * <p>
- * The tests verify that cyclic renderPattern references are rejected, including transitive cycles.
+ * The tests verify that cyclic template references are rejected, including transitive cycles.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2026 Artur Linhart, Algites

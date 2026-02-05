@@ -1,86 +1,34 @@
 package eu.algites.pltf.knitstro.structure.artifacts.model.artifact;
 
 import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.AIiArtifactDependency;
+import eu.algites.pltf.knitstro.structure.artifacts.model.dependency.scopebinding.AIiScopeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Dependency that also points to the target artifact.
  *
  * @author linhart1
  */
-public class AIcArtifactDependency<A extends AIiAbstractArtifact>
-		implements AIiArtifactDependency<A> {
+public class AIcArtifactDependency<A extends AIiAbstractArtifact, AREF extends AIiArtifactRuntimeReference<A>
+		implements AIiArtifactDependency<A, AREF> {
 
-	private AIiArtifactDependencyScope dependencyScope;
-	private List<AIiArtifactOutput<? extends AIiAbstractArtifact>> dependencyExclusions;
-	private AIiArtifactOutput<A> linkedArtifactOutput;
+	private final AREF linkedArtifact;
+	private final List<AIiScopeBinding> bindings = new ArrayList<>();
 
-	public AIcArtifactDependency() {
+	public AIcArtifactDependency(final AREF aLinkedArtifact) {
+		linkedArtifact = aLinkedArtifact;
 	}
 
 	@Override
-	public AIiArtifactOutput<A> getLinkedArtifactOutput() {
-		return linkedArtifactOutput;
-	}
-
-	/**
-	 * @param aLinkedArtifactOutput the linkedArtifactOutput
-	 */
-	public void setLinkedArtifactOutput(final AIiArtifactOutput<A> aLinkedArtifactOutput) {
-		linkedArtifactOutput = aLinkedArtifactOutput;
+	public List<AIiScopeBinding> getBindings() {
+		return bindings;
 	}
 
 	@Override
-	public List<AIiArtifactOutput<? extends AIiAbstractArtifact>> getExclusions() {
-		return dependencyExclusions;
+	public AREF getLinkedArtifact() {
+		return linkedArtifact;
 	}
 
-	public void setDependencyExclusions(List<AIiArtifactOutput<? extends AIiAbstractArtifact>> dependencyExclusions) {
-		this.dependencyExclusions = dependencyExclusions;
-	}
-
-	@Override
-	public AIiArtifactDependencyScope getDependencyScope() {
-		return dependencyScope;
-	}
-
-	public void setDependencyScope(AIiArtifactDependencyScope dependencyScope) {
-		this.dependencyScope = dependencyScope;
-	}
-
-	public void addDependencyExclusion(AIiArtifactOutput<? extends AIiAbstractArtifact> exclusion) {
-		if (dependencyExclusions == null)
-			dependencyExclusions = new ArrayList<>();
-		dependencyExclusions.add(exclusion);
-	}
-
-	@Override
-	public final boolean equals(final Object aO) {
-		if (!(aO instanceof AIcArtifactDependency<?> locthat))
-			return false;
-
-		return Objects.equals(dependencyScope, locthat.dependencyScope) && Objects.equals(
-				dependencyExclusions,
-				locthat.dependencyExclusions) && Objects.equals(linkedArtifactOutput, locthat.linkedArtifactOutput);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = Objects.hashCode(dependencyScope);
-		result = 31 * result + Objects.hashCode(dependencyExclusions);
-		result = 31 * result + Objects.hashCode(linkedArtifactOutput);
-		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "AIcArtifactDependency{" +
-				"dependencyScope=" + dependencyScope +
-				", dependencyExclusions=" + dependencyExclusions +
-				", linkedArtifactOutput=" + linkedArtifactOutput +
-				'}';
-	}
 }

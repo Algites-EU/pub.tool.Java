@@ -1,6 +1,6 @@
 package eu.algites.pltf.knitstro.structure.artifacts.model.artifact;
 
-import eu.algites.pltf.knitstro.structure.artifacts.model.common.AIiArtifactOutputType;
+import eu.algites.pltf.knitstro.structure.artifacts.model.common.outputtype.AIiArtifactOutputType;
 
 import java.util.Optional;
 

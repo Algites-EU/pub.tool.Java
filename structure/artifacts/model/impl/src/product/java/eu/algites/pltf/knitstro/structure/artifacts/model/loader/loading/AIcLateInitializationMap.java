@@ -24,8 +24,8 @@ import java.util.Optional;
  *   <li>Resolve values via {@link AIcRuntimeReference}.</li>
  * </ol>
  *
- * @param <K> key type (e.g., renderPattern ID, artifact ID)
- * @param <V> value type (e.g., renderPattern object, artifact object)
+ * @param <K> key type (e.g., template ID, artifact ID)
+ * @param <V> value type (e.g., template object, artifact object)
  * </p>
  * <p>
  * Copyright: Copyright (c) 2026 Artur Linhart, Algites

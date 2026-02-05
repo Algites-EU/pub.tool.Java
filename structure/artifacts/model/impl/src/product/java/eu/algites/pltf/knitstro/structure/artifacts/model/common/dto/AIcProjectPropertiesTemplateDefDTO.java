@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * Properties renderPattern (named set of imported templates and key/value definitions).
+ * Properties template (named set of imported templates and key/value definitions).
  * @author linhart1
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)

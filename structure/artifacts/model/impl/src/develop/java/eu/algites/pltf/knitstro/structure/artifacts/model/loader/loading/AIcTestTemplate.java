@@ -12,7 +12,7 @@ import java.util.Objects;
  * </p>
  * <p>
  * Description:
- * Minimal test renderPattern implementing {@code AIiAbstractTemplate<T>}.
+ * Minimal test template implementing {@code AIiAbstractTemplate<T>}.
  * Adjust {@link #getIncludedTemplates()} return type to match your production interface if needed.
  * </p>
  * <p>

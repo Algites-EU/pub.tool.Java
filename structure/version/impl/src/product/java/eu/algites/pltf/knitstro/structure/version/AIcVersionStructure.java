@@ -258,7 +258,7 @@ public final class AIcVersionStructure implements AIiVersionStructure {
 			if (findComponentByCode(locCode).isEmpty()) {
 				throw new AIxVersionException(
 						() -> "Canonical render pattern references an unknown component code. structure=" + code
-								+ ", componentCode=" + locCode + ", renderPattern=" + locRender.patternSource(),
+								+ ", componentCode=" + locCode + ", template=" + locRender.patternSource(),
 						AInStringOutputMode.USER
 				);
 			}
